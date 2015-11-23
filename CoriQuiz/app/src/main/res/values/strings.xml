@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Corinthians Quiz Game</string>
+    <string name="new_game">Novo Jogo</string>
+    <string name="ranking">Ranking</string>
+    <string name="share">Compartilhar</string>
+    <string name="question">Pergunta:</string>
+    <string name="help">Ajuda:</string>
+    <string name="cheering">Torcida</string>
+    <string name="coach">Tecnico</string>
+    <string name="escape">Fuga</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_round">Corinthians Quiz Game</string>
+
+</resources>
