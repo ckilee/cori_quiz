@@ -23,6 +23,11 @@
             android:label="@string/title_activity_round"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".BetweenRoundActivity"
+            android:label="@string/title_activity_between_round"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

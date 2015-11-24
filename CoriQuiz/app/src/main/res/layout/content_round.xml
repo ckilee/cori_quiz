@@ -20,19 +20,20 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:text="New Question"
         android:id="@+id/text_view_question"
         android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/radioGroup"
         android:layout_toEndOf="@+id/textView2" />
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_below="@+id/textView2"
+        android:layout_height="180dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/radioGroup">
+        android:id="@+id/radioGroup"
+        android:layout_below="@+id/text_view_question">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -70,7 +71,7 @@
         android:layout_height="wrap_content"
         android:text="@string/help"
         android:id="@+id/textView3"
-        android:layout_below="@+id/radioGroup"
+        android:layout_above="@+id/buttonCheering"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -78,7 +79,7 @@
         android:layout_height="wrap_content"
         android:text="@string/cheering"
         android:id="@+id/buttonCheering"
-        android:layout_below="@+id/textView3"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -96,5 +97,37 @@
         android:id="@+id/buttonEscape"
         android:layout_alignTop="@+id/buttonCoach"
         android:layout_toEndOf="@+id/buttonCoach" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/answer"
+        android:id="@+id/button_answer"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignEnd="@+id/radioGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textViewRoundNumber"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/textViewScore"
+        android:layout_below="@+id/radioGroup"
+        android:layout_toEndOf="@+id/textView4" />
 
 </RelativeLayout>

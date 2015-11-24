@@ -11,10 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import frolic.br.coriquiz.model.QuizDAO;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button shareButton;
     private Button newGameButton;
+    private QuizDAO quizDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         shareButton = (Button) findViewById(R.id.button_share);
         newGameButton = (Button) findViewById(R.id.button_new_game);
         configureViews();
+        quizDAO = new QuizDAO(getApplicationContext());
+        quizDAO.addDefaultValues();
     }
 
     private void configureViews() {
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this,RoundActivity.class);
+                intent.putExtra("round",1);
+                intent.putExtra("score",0);
                 startActivity(intent);
 
             }

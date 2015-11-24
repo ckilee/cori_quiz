@@ -8,7 +8,13 @@
     <string name="cheering">Torcida</string>
     <string name="coach">Tecnico</string>
     <string name="escape">Fuga</string>
+    <string name="answer">Responder</string>
+    <string name="next_round">Proxima Rodada</string>
+    <string name="score">Score:</string>
+    <string name="between_round_right_message" formatted="false">Parabens, voce completou a RODADA %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir o game =D</string>
+    <string name="between_round_wrong_message" formatted="false">Infelizmente voce nao passou para a rodada %round%, veja a sua pontuaçao abaixo e tente novamente.</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_round">Corinthians Quiz Game</string>
+    <string name="title_activity_between_round">BetweenRoundActivity</string>
 
 </resources>
