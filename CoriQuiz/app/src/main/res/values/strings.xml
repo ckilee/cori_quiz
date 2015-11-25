@@ -11,10 +11,13 @@
     <string name="answer">Responder</string>
     <string name="next_round">Proxima Rodada</string>
     <string name="score">Score:</string>
-    <string name="between_round_right_message" formatted="false">Parabens, voce completou a RODADA %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir o game =D</string>
-    <string name="between_round_wrong_message" formatted="false">Infelizmente voce nao passou para a rodada %round%, veja a sua pontuaçao abaixo e tente novamente.</string>
+    <string name="between_round_right_message" formatted="false">Parabens, você respondeu corretamente a pergunta: %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir o game =D</string>
+    <string name="win_message" formatted="false">Parabéns, você terminou a rodada do Quiz! com a pontuação: %score%! Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
+    <string name="fail_message" formatted="false">Infelizmente voce errou a pergunta, veja a sua pontuaçao abaixo e tente novamente. Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_round">Corinthians Quiz Game</string>
     <string name="title_activity_between_round">BetweenRoundActivity</string>
+    <string name="title_activity_fail">FailActivity</string>
+    <string name="title_activity_win">WinActivity</string>
 
 </resources>

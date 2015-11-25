@@ -73,11 +73,27 @@ public class RoundActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 calculateScore();
-                Intent intent = new Intent(RoundActivity.this,BetweenRoundActivity.class);
-                intent.putExtra("round", roundNum);
-                intent.putExtra("score",scoreNum);
-                intent.putExtra("gotrightanswer",gotRightAnswer);
-                startActivity(intent);
+                if(gotRightAnswer) {
+                    if( roundNum !=10) {
+                        Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
+                        intent.putExtra("round", roundNum);
+                        intent.putExtra("score", scoreNum);
+                        intent.putExtra("gotrightanswer", gotRightAnswer);
+                        startActivity(intent);
+                    } else{
+                        Intent intent = new Intent(RoundActivity.this, WinActivity.class);
+                        intent.putExtra("round", roundNum);
+                        intent.putExtra("score", scoreNum);
+                        startActivity(intent);
+                    }
+
+                } else{
+                    Intent intent = new Intent(RoundActivity.this, FailActivity.class);
+                    intent.putExtra("round", roundNum);
+                    intent.putExtra("score", scoreNum);
+                    intent.putExtra("gotrightanswer", gotRightAnswer);
+                    startActivity(intent);
+                }
                 finish();
             }
         };
