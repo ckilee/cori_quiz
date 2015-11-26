@@ -1,6 +1,7 @@
 package frolic.br.coriquiz;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,7 +46,9 @@ public class BetweenRoundActivity extends AppCompatActivity {
         String message = this.getString(R.string.between_round_right_message);
 
         if(fromEscape){
-            imageViewBetweenRound.setBackground(getDrawable(R.drawable.escape));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                imageViewBetweenRound.setBackground(getDrawable(R.drawable.escape));
+            }
             message = this.getString(R.string.using_escape_help);
         }
 
