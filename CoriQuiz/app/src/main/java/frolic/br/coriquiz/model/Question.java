@@ -10,16 +10,20 @@ public class Question {
     private String answer3;
     private String answer4;
     private String answer5;
-    private int rightAnwser;
+    private int rightAnswer;
 
-    public Question(String question, String answer1, String answer2, String answer3, String answer4, String answer5, int rightAnwser) {
+    public Question(String question, String answer1, String answer2, String answer3, String answer4, String answer5, int rightAnswer) {
         this.question = question;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
         this.answer4 = answer4;
         this.answer5 = answer5;
-        this.rightAnwser = rightAnwser;
+        this.rightAnswer = rightAnswer;
+    }
+
+    public void applyCheeringHelp(){
+
     }
 
     public String getQuestion() {
@@ -71,11 +75,11 @@ public class Question {
     }
 
     public int getRightAnwser() {
-        return rightAnwser;
+        return rightAnswer;
     }
 
-    public void setRightAnwser(int rightAnwser) {
-        this.rightAnwser = rightAnwser;
+    public void setRightAnwser(int rightAnswer) {
+        this.rightAnswer = rightAnswer;
     }
 
 

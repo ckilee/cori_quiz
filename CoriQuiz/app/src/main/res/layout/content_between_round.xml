@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textViewMessage"
-        android:layout_below="@+id/imageView4"
+        android:layout_below="@+id/imageViewBetweenRound"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -37,7 +37,7 @@
     <ImageView
         android:layout_width="400dp"
         android:layout_height="200dp"
-        android:id="@+id/imageView4"
+        android:id="@+id/imageViewBetweenRound"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/ronaldo" />

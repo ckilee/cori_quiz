@@ -14,6 +14,9 @@
     <string name="between_round_right_message" formatted="false">Parabens, você respondeu corretamente a pergunta: %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir o game =D</string>
     <string name="win_message" formatted="false">Parabéns, você terminou a rodada do Quiz! com a pontuação: %score%! Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
     <string name="fail_message" formatted="false">Infelizmente voce errou a pergunta, veja a sua pontuaçao abaixo e tente novamente. Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
+    <string name="using_cheering_help">A torcida te ajudou removendo randomicamente uma pergunta. Ooh!! Todo poderoso Timão!!</string>
+    <string name="using_coach_help">O técnico te ajudou removendo randomicamente duas perguntas. É nóis curinthians!</string>
+    <string name="using_escape_help">Você fugiu do BO junto nóis! Bora para a próxima pergunta!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_round">Corinthians Quiz Game</string>
     <string name="title_activity_between_round">BetweenRoundActivity</string>

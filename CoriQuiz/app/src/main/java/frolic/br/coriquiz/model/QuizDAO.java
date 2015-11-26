@@ -8,6 +8,8 @@ import android.util.Log;
 
 import java.util.Random;
 
+import frolic.br.coriquiz.utils.Utils;
+
 /**
  * Created by ckilee on 23/11/15.
  */
@@ -80,7 +82,7 @@ public class QuizDAO extends QuizDBHelper {
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
         String maxId = c.getString(0);
-        int randomId = randInt(1,Integer.parseInt(maxId));
+        int randomId = Utils.randInt(1, Integer.parseInt(maxId));
 
         c = db.query(QuizContract.QUESTION_TABLE,null,QuizContract.Column.ID+" = ?",new String[]{Integer.toString(randomId)},null,null,null);
         c.moveToFirst();
@@ -89,12 +91,5 @@ public class QuizDAO extends QuizDBHelper {
         db.close();
         return q;
     }
-
-    private int randInt(int min, int max){
-        Random rand = new Random();
-        int randomNum = rand.nextInt((max-min)+1)+min;
-        return randomNum;
-    }
-
 
 }

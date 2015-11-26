@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import frolic.br.coriquiz.model.Question;
 import frolic.br.coriquiz.model.QuizDAO;
+import frolic.br.coriquiz.utils.Utils;
 
 public class RoundActivity extends AppCompatActivity {
     private QuizDAO quizDAO;
@@ -25,7 +27,11 @@ public class RoundActivity extends AppCompatActivity {
     private RadioButton answer4;
     private RadioButton answer5;
     private Button answerButton;
+    private Button cheeringButton;
+    private Button coachButton;
+    private Button escapeButton;
     private Question question;
+    private int helpStatus = 0;
     private int rightAnswer = 0;
     private int roundNum = 1;
     private int scoreNum = 0;
@@ -46,6 +52,9 @@ public class RoundActivity extends AppCompatActivity {
         answer4 = (RadioButton) findViewById(R.id.rbQuestion4);
         answer5 = (RadioButton) findViewById(R.id.rbQuestion5);
         answerButton = (Button) findViewById(R.id.button_answer);
+        cheeringButton = (Button) findViewById(R.id.buttonCheering);
+        coachButton = (Button) findViewById(R.id.buttonCoach);
+        escapeButton = (Button) findViewById(R.id.buttonEscape);
         quizDAO = new QuizDAO(getApplicationContext());
         question = quizDAO.getRandonQuestion();
         configureViews();
@@ -62,9 +71,12 @@ public class RoundActivity extends AppCompatActivity {
         rightAnswer = question.getRightAnwser();
         Intent intent = this.getIntent();
         roundNum = intent.getIntExtra("round", 1);
-        scoreNum = intent.getIntExtra("score",0);
+        scoreNum = intent.getIntExtra("score", 0);
+        helpStatus = intent.getIntExtra("helpstatus", 0);
         String round = roundNum+"/10";
         roundNuberTV.setText(round);
+
+        disableHelp(helpStatus);
 
         scoreTV.setText(Integer.toString(scoreNum));
 
@@ -74,24 +86,13 @@ public class RoundActivity extends AppCompatActivity {
             public void onClick(View v){
                 calculateScore();
                 if(gotRightAnswer) {
-                    if( roundNum !=10) {
-                        Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
-                        intent.putExtra("round", roundNum);
-                        intent.putExtra("score", scoreNum);
-                        intent.putExtra("gotrightanswer", gotRightAnswer);
-                        startActivity(intent);
-                    } else{
-                        Intent intent = new Intent(RoundActivity.this, WinActivity.class);
-                        intent.putExtra("round", roundNum);
-                        intent.putExtra("score", scoreNum);
-                        startActivity(intent);
-                    }
-
+                    proceedToNewActivity();
                 } else{
                     Intent intent = new Intent(RoundActivity.this, FailActivity.class);
                     intent.putExtra("round", roundNum);
                     intent.putExtra("score", scoreNum);
                     intent.putExtra("gotrightanswer", gotRightAnswer);
+                    intent.putExtra("helpstatus", helpStatus);
                     startActivity(intent);
                 }
                 finish();
@@ -99,7 +100,50 @@ public class RoundActivity extends AppCompatActivity {
         };
         answerButton.setOnClickListener(answerListener);
 
+        //Cheering Button
+        View.OnClickListener cheeringListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                applyCheeringHelp();
 
+            }
+        };
+        cheeringButton.setOnClickListener(cheeringListener);
+
+        //Coach Button
+        View.OnClickListener coachListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                applyCoachHelp();
+            }
+        };
+        coachButton.setOnClickListener(coachListener);
+
+        //Escape Button
+        View.OnClickListener escapeListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Toast.makeText(getApplicationContext(),R.string.using_escape_help,Toast.LENGTH_LONG).show();
+                helpStatus++;
+                proceedToNewActivityFromEscape();
+                finish();
+            }
+        };
+        escapeButton.setOnClickListener(escapeListener);
+
+
+    }
+
+    private void disableHelp(int helpStatus){
+        if(helpStatus==1||helpStatus==3||helpStatus==5||helpStatus==7){
+            escapeButton.setEnabled(false);
+        }
+        if(helpStatus==2||helpStatus==3||helpStatus==6||helpStatus==7){
+            coachButton.setEnabled(false);
+        }
+        if(helpStatus==4||helpStatus==5||helpStatus==6||helpStatus==7){
+            cheeringButton.setEnabled(false);
+        }
     }
 
     private void calculateScore(){
@@ -111,6 +155,93 @@ public class RoundActivity extends AppCompatActivity {
 
     }
 
+    private void applyCoachHelp(){
+        int nroOfRemoved = 0;
+        int alreadyDisabledAnswer = 0;
+        while(nroOfRemoved<2){
+            int randInt = Utils.randInt(1,5);
+            if(randInt==rightAnswer || alreadyDisabledAnswer == randInt)
+                continue;
+
+            if(randInt==1)
+
+            if(randInt==1)
+                answer1.setEnabled(false);
+            if(randInt==2)
+                answer2.setEnabled(false);
+            if(randInt==3)
+                answer3.setEnabled(false);
+            if(randInt==4)
+                answer4.setEnabled(false);
+            if(randInt==5)
+                answer5.setEnabled(false);
+            alreadyDisabledAnswer = randInt;
+            nroOfRemoved++;
+        }
+        helpStatus = helpStatus+2;
+        coachButton.setEnabled(false);
+        cheeringButton.setEnabled(false);
+        Toast.makeText(getApplicationContext(),R.string.using_coach_help,Toast.LENGTH_LONG).show();
+    }
+
+    private void applyCheeringHelp(){
+        boolean removedQuestion = false;
+        while(!removedQuestion){
+            int randInt = Utils.randInt(1,5);
+            if(randInt==rightAnswer)
+                continue;
+
+            if(randInt==1)
+                answer1.setEnabled(false);
+            if(randInt==2)
+                answer2.setEnabled(false);
+            if(randInt==3)
+                answer3.setEnabled(false);
+            if(randInt==4)
+                answer4.setEnabled(false);
+            if(randInt==5)
+                answer5.setEnabled(false);
+            removedQuestion = true;
+        }
+        Toast.makeText(getApplicationContext(),R.string.using_cheering_help,Toast.LENGTH_LONG).show();
+        coachButton.setEnabled(false);
+        cheeringButton.setEnabled(false);
+        helpStatus = helpStatus+4;
+
+    }
+
+    private void proceedToNewActivityFromEscape(){
+        if( roundNum !=10) {
+            Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
+            intent.putExtra("round", roundNum);
+            intent.putExtra("score", scoreNum);
+            intent.putExtra("gotrightanswer", gotRightAnswer);
+            intent.putExtra("helpstatus", helpStatus);
+            intent.putExtra("fromescape", true);
+            startActivity(intent);
+        } else{
+            Intent intent = new Intent(RoundActivity.this, WinActivity.class);
+            intent.putExtra("round", roundNum);
+            intent.putExtra("score", scoreNum);
+            startActivity(intent);
+        }
+    }
+
+    private void proceedToNewActivity(){
+        if( roundNum !=10) {
+            Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
+            intent.putExtra("round", roundNum);
+            intent.putExtra("score", scoreNum);
+            intent.putExtra("gotrightanswer", gotRightAnswer);
+            intent.putExtra("helpstatus", helpStatus);
+            startActivity(intent);
+        } else{
+            Intent intent = new Intent(RoundActivity.this, WinActivity.class);
+            intent.putExtra("round", roundNum);
+            intent.putExtra("score", scoreNum);
+            startActivity(intent);
+        }
+    }
 
 
 }
