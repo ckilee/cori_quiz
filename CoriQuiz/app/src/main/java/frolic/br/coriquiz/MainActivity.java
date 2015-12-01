@@ -2,34 +2,82 @@ package frolic.br.coriquiz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphRequestAsyncTask;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
+
+import org.json.JSONObject;
 
 import frolic.br.coriquiz.model.QuizDAO;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
     private Button shareButton;
     private Button newGameButton;
+    private TextView textViewName;
     private QuizDAO quizDAO;
+    private String userName;
+    private CallbackManager callbackManager;
+    private LoginButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         shareButton = (Button) findViewById(R.id.button_share);
         newGameButton = (Button) findViewById(R.id.button_new_game);
+        textViewName = (TextView) findViewById(R.id.textViewName);
+        loginButton = (LoginButton) findViewById(R.id.button_face);
         configureViews();
         quizDAO = new QuizDAO(getApplicationContext());
         quizDAO.addDefaultValues();
+
+        Intent i = getIntent();
+        userName = i.getStringExtra("name");
+        textViewName.setText(userName);
+        if(userName.equals("Anonimo"))
+            loginButton.setVisibility(View.GONE);
+
+        //Anonymous login Button
+        View.OnClickListener loginButtonClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                LoginManager.getInstance().logOut();
+                finish();
+
+            }
+        };
+        loginButton.setOnClickListener(loginButtonClickListener);
+
     }
 
     private void configureViews() {
@@ -83,4 +131,15 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+
+
 }
