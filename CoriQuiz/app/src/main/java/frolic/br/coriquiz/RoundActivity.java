@@ -138,12 +138,15 @@ public class RoundActivity extends AppCompatActivity {
     private void disableHelp(int helpStatus){
         if(helpStatus==1||helpStatus==3||helpStatus==5||helpStatus==7){
             escapeButton.setEnabled(false);
+            escapeButton.setBackgroundResource(R.drawable.escape_icon_disabled);
         }
         if(helpStatus==2||helpStatus==3||helpStatus==6||helpStatus==7){
             coachButton.setEnabled(false);
+            coachButton.setBackgroundResource(R.drawable.coach_disabled);
         }
         if(helpStatus==4||helpStatus==5||helpStatus==6||helpStatus==7){
             cheeringButton.setEnabled(false);
+            cheeringButton.setBackgroundResource(R.drawable.cheering_disabled);
         }
     }
 
@@ -182,6 +185,8 @@ public class RoundActivity extends AppCompatActivity {
         helpStatus = helpStatus+2;
         coachButton.setEnabled(false);
         cheeringButton.setEnabled(false);
+        coachButton.setBackgroundResource(R.drawable.coach_disabled);
+        cheeringButton.setBackgroundResource(R.drawable.cheering_disabled);
         Toast.makeText(getApplicationContext(),R.string.using_coach_help,Toast.LENGTH_LONG).show();
     }
 
@@ -207,6 +212,8 @@ public class RoundActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),R.string.using_cheering_help,Toast.LENGTH_LONG).show();
         coachButton.setEnabled(false);
         cheeringButton.setEnabled(false);
+        coachButton.setBackgroundResource(R.drawable.coach_disabled);
+        cheeringButton.setBackgroundResource(R.drawable.cheering_disabled);
         helpStatus = helpStatus+4;
 
     }

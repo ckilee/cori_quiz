@@ -41,4 +41,6 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/cori_logo"
         android:layout_above="@+id/login_button" />
+
+
 </RelativeLayout>
