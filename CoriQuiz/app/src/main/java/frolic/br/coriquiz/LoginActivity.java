@@ -34,6 +34,8 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
+import frolic.br.coriquiz.utils.ExtraNames;
+
 public class LoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private Button anonymousButton;
@@ -51,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
 
         anonymousButton = (Button)findViewById(R.id.buttonLoginAnonymous);
 
-
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_birthday, user_friends"));
         onFbLogin();
@@ -62,15 +63,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v){
                 Toast.makeText(getApplicationContext(),R.string.login_as_anonymous_message,Toast.LENGTH_LONG).show();
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                i.putExtra("name","Anonimo");
+                i.putExtra(ExtraNames.NAME,getString(R.string.anonymous_name));
                 startActivity(i);
 
             }
         };
         anonymousButton.setOnClickListener(anonymousButtonClickListener);
-
-
-
     }
 
     // Private method to handle Facebook login and callback
@@ -80,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Set permissions
         //LoginManager.getInstance().setReadPermissions(Arrays.asList("email", "user_photos", "public_profile"));
-
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -95,14 +92,10 @@ public class LoginActivity extends AppCompatActivity {
                                 userID = user.optString("id");
                                 Log.i("LoginActivity", "onSucess");
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                i.putExtra("name",userName);
+                                i.putExtra(ExtraNames.NAME,userName);
                                 startActivity(i);
-
                             }
                         }).executeAsync();
-
-
-
                     }
 
                     @Override
@@ -115,8 +108,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("LoginActivity", "onError");
                     }
                 });
-
-
     }
 
     @Override

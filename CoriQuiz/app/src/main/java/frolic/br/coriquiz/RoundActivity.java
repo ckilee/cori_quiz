@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import frolic.br.coriquiz.model.Question;
 import frolic.br.coriquiz.model.QuizDAO;
+import frolic.br.coriquiz.utils.ExtraNames;
 import frolic.br.coriquiz.utils.Utils;
 
 public class RoundActivity extends AppCompatActivity {
@@ -70,9 +71,9 @@ public class RoundActivity extends AppCompatActivity {
         answer5.setText(question.getAnswer5());
         rightAnswer = question.getRightAnwser();
         Intent intent = this.getIntent();
-        roundNum = intent.getIntExtra("round", 1);
-        scoreNum = intent.getIntExtra("score", 0);
-        helpStatus = intent.getIntExtra("helpstatus", 0);
+        roundNum = intent.getIntExtra(ExtraNames.ROUND, 1);
+        scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
+        helpStatus = intent.getIntExtra(ExtraNames.HELP_STATUS, 0);
         String round = roundNum+"/10";
         roundNuberTV.setText(round);
 
@@ -89,10 +90,10 @@ public class RoundActivity extends AppCompatActivity {
                     proceedToNewActivity();
                 } else{
                     Intent intent = new Intent(RoundActivity.this, FailActivity.class);
-                    intent.putExtra("round", roundNum);
-                    intent.putExtra("score", scoreNum);
-                    intent.putExtra("gotrightanswer", gotRightAnswer);
-                    intent.putExtra("helpstatus", helpStatus);
+                    intent.putExtra(ExtraNames.ROUND, roundNum);
+                    intent.putExtra(ExtraNames.SCORE, scoreNum);
+                    intent.putExtra(ExtraNames.GOT_RIGHT_ANSWER, gotRightAnswer);
+                    intent.putExtra(ExtraNames.HELP_STATUS, helpStatus);
                     startActivity(intent);
                 }
                 finish();
@@ -213,16 +214,16 @@ public class RoundActivity extends AppCompatActivity {
     private void proceedToNewActivityFromEscape(){
         if( roundNum !=10) {
             Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
-            intent.putExtra("round", roundNum);
-            intent.putExtra("score", scoreNum);
-            intent.putExtra("gotrightanswer", gotRightAnswer);
-            intent.putExtra("helpstatus", helpStatus);
-            intent.putExtra("fromescape", true);
+            intent.putExtra(ExtraNames.ROUND, roundNum);
+            intent.putExtra(ExtraNames.SCORE, scoreNum);
+            intent.putExtra(ExtraNames.GOT_RIGHT_ANSWER, gotRightAnswer);
+            intent.putExtra(ExtraNames.HELP_STATUS, helpStatus);
+            intent.putExtra(ExtraNames.FROM_ESCAPE, true);
             startActivity(intent);
         } else{
             Intent intent = new Intent(RoundActivity.this, WinActivity.class);
-            intent.putExtra("round", roundNum);
-            intent.putExtra("score", scoreNum);
+            intent.putExtra(ExtraNames.ROUND, roundNum);
+            intent.putExtra(ExtraNames.SCORE, scoreNum);
             startActivity(intent);
         }
     }
@@ -230,15 +231,15 @@ public class RoundActivity extends AppCompatActivity {
     private void proceedToNewActivity(){
         if( roundNum !=10) {
             Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
-            intent.putExtra("round", roundNum);
-            intent.putExtra("score", scoreNum);
-            intent.putExtra("gotrightanswer", gotRightAnswer);
-            intent.putExtra("helpstatus", helpStatus);
+            intent.putExtra(ExtraNames.ROUND, roundNum);
+            intent.putExtra(ExtraNames.SCORE, scoreNum);
+            intent.putExtra(ExtraNames.GOT_RIGHT_ANSWER, gotRightAnswer);
+            intent.putExtra(ExtraNames.HELP_STATUS, helpStatus);
             startActivity(intent);
         } else{
             Intent intent = new Intent(RoundActivity.this, WinActivity.class);
-            intent.putExtra("round", roundNum);
-            intent.putExtra("score", scoreNum);
+            intent.putExtra(ExtraNames.ROUND, roundNum);
+            intent.putExtra(ExtraNames.SCORE, scoreNum);
             startActivity(intent);
         }
     }

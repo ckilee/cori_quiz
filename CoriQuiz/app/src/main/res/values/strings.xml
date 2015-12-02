@@ -24,5 +24,6 @@
     <string name="title_activity_between_round">BetweenRoundActivity</string>
     <string name="title_activity_fail">FailActivity</string>
     <string name="title_activity_win">WinActivity</string>
+    <string name="anonymous_name">Anônimo</string>
     <string name="app_id">876336285821169</string>
 </resources>

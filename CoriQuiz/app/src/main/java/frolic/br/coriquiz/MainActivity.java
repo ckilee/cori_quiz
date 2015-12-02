@@ -33,7 +33,7 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONObject;
 
 import frolic.br.coriquiz.model.QuizDAO;
-
+import frolic.br.coriquiz.utils.ExtraNames;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         quizDAO.addDefaultValues();
 
         Intent i = getIntent();
-        userName = i.getStringExtra("name");
+        userName = i.getStringExtra(ExtraNames.NAME);
         textViewName.setText(userName);
-        if(userName.equals("Anonimo"))
+        if(userName.equals(getString(R.string.anonymous_name)))
             loginButton.setVisibility(View.GONE);
 
         //Anonymous login Button
@@ -85,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener shareListener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                String message = "Corinthians Quiz Game - https://play.google.com/store/apps/details?id=frolic.br.coriquiz";
+                String message = getString(R.string.app_name)+" - https://play.google.com/store/apps/details?id=frolic.br.coriquiz";
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
                 share.putExtra(Intent.EXTRA_TEXT, message);
 
-                startActivity(Intent.createChooser(share, "Corinthians Quiz Game"));
+                startActivity(Intent.createChooser(share, getString(R.string.app_name)));
 
             }
         };
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this,RoundActivity.class);
-                intent.putExtra("round",1);
-                intent.putExtra("score",0);
+                intent.putExtra(ExtraNames.ROUND,1);
+                intent.putExtra(ExtraNames.SCORE,0);
                 startActivity(intent);
 
             }

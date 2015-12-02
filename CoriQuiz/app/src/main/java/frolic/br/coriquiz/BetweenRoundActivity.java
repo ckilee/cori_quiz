@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import frolic.br.coriquiz.utils.ExtraNames;
+
 public class BetweenRoundActivity extends AppCompatActivity {
     private TextView messageTextView;
     private int roundNum = 1;
@@ -38,11 +40,11 @@ public class BetweenRoundActivity extends AppCompatActivity {
 
     private void configureViews(){
         Intent intent = this.getIntent();
-        roundNum = intent.getIntExtra("round", 1);
-        scoreNum = intent.getIntExtra("score", 0);
-        gotRightAnswer = intent.getBooleanExtra("gotrightanswer", true);
-        helpStatus = intent.getIntExtra("helpstatus",0);
-        fromEscape = intent.getBooleanExtra("fromescape",false);
+        roundNum = intent.getIntExtra(ExtraNames.ROUND, 1);
+        scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
+        gotRightAnswer = intent.getBooleanExtra(ExtraNames.GOT_RIGHT_ANSWER, true);
+        helpStatus = intent.getIntExtra(ExtraNames.HELP_STATUS,0);
+        fromEscape = intent.getBooleanExtra(ExtraNames.FROM_ESCAPE,false);
         String message = this.getString(R.string.between_round_right_message);
 
         if(fromEscape){
@@ -62,9 +64,9 @@ public class BetweenRoundActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(BetweenRoundActivity.this,RoundActivity.class);
-                intent.putExtra("round",roundNum+1);
-                intent.putExtra("score",scoreNum);
-                intent.putExtra("helpstatus",helpStatus);
+                intent.putExtra(ExtraNames.ROUND,roundNum+1);
+                intent.putExtra(ExtraNames.ROUND,scoreNum);
+                intent.putExtra(ExtraNames.HELP_STATUS,helpStatus);
                 startActivity(intent);
                 finish();
             }
@@ -75,12 +77,12 @@ public class BetweenRoundActivity extends AppCompatActivity {
         View.OnClickListener shareListener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                String message = "Corinthians Quiz Game - https://play.google.com/store/apps/details?id=frolic.br.coriquiz";
+                String message = getString(R.string.app_name) + " - https://play.google.com/store/apps/details?id=frolic.br.coriquiz";
                 Intent share = new Intent(Intent.ACTION_SEND);
                 share.setType("text/plain");
                 share.putExtra(Intent.EXTRA_TEXT, message);
 
-                startActivity(Intent.createChooser(share, "Corinthians Quiz Game"));
+                startActivity(Intent.createChooser(share, getString(R.string.app_name)));
 
             }
         };
