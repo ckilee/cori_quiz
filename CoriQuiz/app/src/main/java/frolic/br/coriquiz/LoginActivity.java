@@ -1,5 +1,6 @@
 package frolic.br.coriquiz;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -36,7 +37,7 @@ import java.util.Arrays;
 
 import frolic.br.coriquiz.utils.ExtraNames;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends Activity {
     private CallbackManager callbackManager;
     private Button anonymousButton;
     private LoginButton loginButton;

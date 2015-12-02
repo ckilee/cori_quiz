@@ -5,7 +5,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="frolic.br.coriquiz.LoginActivity">
+    tools:context="frolic.br.coriquiz.LoginActivity"
+    android:background="@drawable/backgroundlogin">
 
     <Button
         android:layout_width="wrap_content"
@@ -13,7 +14,8 @@
         android:text="@string/login_as_anonymous"
         android:id="@+id/buttonLoginAnonymous"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignEnd="@+id/login_button"
+        android:layout_alignStart="@+id/login_button" />
 
     <com.facebook.login.widget.LoginButton
         android:layout_width="wrap_content"
@@ -22,4 +24,21 @@
         android:id="@+id/login_button"
         android:layout_above="@+id/buttonLoginAnonymous"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView4"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/applabel" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5"
+        android:layout_below="@+id/imageView4"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/cori_logo"
+        android:layout_above="@+id/login_button" />
 </RelativeLayout>
