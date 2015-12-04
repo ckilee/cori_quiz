@@ -10,6 +10,8 @@ public class QuizContract {
     public static final String DB_NAME = "quiz.db";
     public static final int DB_VERSION = 1;
     public static final String QUESTION_TABLE = "QUESTION";
+    public static final String USER_TABLE = "USER";
+    public static final String RANKING_TABLE = "RANKING";
     public static final String DEFAULT_SORT = Column.QUESTION + " DESC";
     public static final String[] COLUMN_NAMES = {
             Column.ID, Column.QUESTION, Column.ANSWER1, Column.ANSWER2,
@@ -23,5 +25,16 @@ public class QuizContract {
         public static final String ANSWER4 = "ANSWER4";
         public static final String ANSWER5 = "ANSWER5";
         public static final String RIGHT_ANSWER = "RIGHT_ANSWER";
+    }
+
+    public class Column_User {
+        public static final String ID = BaseColumns._ID;
+        public static final String Name = "NAME";
+    }
+
+    public class Column_Ranking {
+        public static final String ID = BaseColumns._ID;
+        public static final String USER_ID = "USER_ID";
+        public static final String SCORE = "SCORE";
     }
 }

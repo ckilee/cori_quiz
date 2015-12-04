@@ -15,8 +15,8 @@ public class QuizDBHelper extends SQLiteOpenHelper{
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL para criar a tabela anuncio
-        String CREATE_ANUNCIO_TABLE =
+        // SQL para criar a tabela quiz
+        String CREATE_QUESTION_TABLE =
                 "CREATE TABLE " + QuizContract.QUESTION_TABLE + " ( "
                         + QuizContract.Column.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + QuizContract.Column.QUESTION + " TEXT NOT NULL, "
@@ -26,8 +26,22 @@ public class QuizDBHelper extends SQLiteOpenHelper{
                         + QuizContract.Column.ANSWER4 + " TEXT NOT NULL, "
                         + QuizContract.Column.ANSWER5 + " TEXT NOT NULL, "
                         + QuizContract.Column.RIGHT_ANSWER + " INTEGER NOT NULL)";
-        db.execSQL(CREATE_ANUNCIO_TABLE);
+        db.execSQL(CREATE_QUESTION_TABLE);
 
+        // SQL para criar a tabela quiz
+        String CREATE_USER_TABLE =
+                "CREATE TABLE " + QuizContract.USER_TABLE + " ( "
+                        + QuizContract.Column_User.ID + " INTEGER PRIMARY KEY, "
+                        + QuizContract.Column_User.Name + " TEXT NOT NULL)";
+        db.execSQL(CREATE_USER_TABLE);
+
+        // SQL para criar a tabela quiz
+        String CREATE_RANKING_TABLE =
+                "CREATE TABLE " + QuizContract.RANKING_TABLE + " ( "
+                        + QuizContract.Column_Ranking.ID + " INTEGER PRIMARY KEY, "
+                        + QuizContract.Column_Ranking.USER_ID + " INTEGER NOT NULL, "
+                        + QuizContract.Column_Ranking.SCORE + " INTEGER NOT NULL)";
+        db.execSQL(CREATE_RANKING_TABLE);
     }
 
 

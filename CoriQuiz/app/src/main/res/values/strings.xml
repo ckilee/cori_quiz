@@ -24,6 +24,14 @@
     <string name="title_activity_between_round">BetweenRoundActivity</string>
     <string name="title_activity_fail">FailActivity</string>
     <string name="title_activity_win">WinActivity</string>
+    <string name="title_ranking">Ranking</string>
+    <string name="Name">Nome</string>
+    <string name="Score">Score</string>
     <string name="anonymous_name">Anônimo</string>
     <string name="app_id">876336285821169</string>
+    <string name="app_acess_token">876336285821169|ScJeTM2IuYDPlfp2fmJbZnPpx-A</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_ranking">RankingActivity</string>
 </resources>

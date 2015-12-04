@@ -34,15 +34,19 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
+import frolic.br.coriquiz.model.QuizDAO;
+import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.ExtraNames;
 
 public class LoginActivity extends Activity {
     private CallbackManager callbackManager;
     private Button anonymousButton;
     private LoginButton loginButton;
-    private String userID = "";
-    private String userName = "Anonymous";
+    private QuizDAO quizDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +54,14 @@ public class LoginActivity extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
 
         setContentView(R.layout.activity_login);
+        User.name = this.getString(R.string.anonymous_name);
+        quizDAO = new QuizDAO(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
         anonymousButton = (Button)findViewById(R.id.buttonLoginAnonymous);
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_birthday, user_friends"));
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
         onFbLogin();
 
         //Anonymous login Button
@@ -64,7 +70,6 @@ public class LoginActivity extends Activity {
             public void onClick(View v){
                 Toast.makeText(getApplicationContext(),R.string.login_as_anonymous_message,Toast.LENGTH_LONG).show();
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                i.putExtra(ExtraNames.NAME,getString(R.string.anonymous_name));
                 startActivity(i);
 
             }
@@ -88,15 +93,17 @@ public class LoginActivity extends Activity {
 
                         GraphRequestAsyncTask request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
                             @Override
-                            public void onCompleted(JSONObject user, GraphResponse graphResponse) {
-                                userName = user.optString("name");
-                                userID = user.optString("id");
+                            public void onCompleted(JSONObject userJson, GraphResponse graphResponse) {
+                                User.fbTokenRequest = accessToken;
+                                User.id = userJson.optString("id");
+                                User.name = userJson.optString("name");
+                                //quizDAO.addUserIfNotExist();
                                 Log.i("LoginActivity", "onSucess");
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                i.putExtra(ExtraNames.NAME,userName);
                                 startActivity(i);
                             }
                         }).executeAsync();
+
                     }
 
                     @Override

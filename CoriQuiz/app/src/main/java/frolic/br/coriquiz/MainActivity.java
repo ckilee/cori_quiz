@@ -33,6 +33,7 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONObject;
 
 import frolic.br.coriquiz.model.QuizDAO;
+import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.ExtraNames;
 
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button shareButton;
     private Button newGameButton;
+    private Button rankingButton;
     private TextView textViewName;
     private QuizDAO quizDAO;
     private String userName;
@@ -55,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         shareButton = (Button) findViewById(R.id.button_share);
         newGameButton = (Button) findViewById(R.id.button_new_game);
+        rankingButton = (Button) findViewById(R.id.button_ranking);
         textViewName = (TextView) findViewById(R.id.textViewName);
         loginButton = (LoginButton) findViewById(R.id.button_face);
         configureViews();
         quizDAO = new QuizDAO(getApplicationContext());
         quizDAO.addDefaultValues();
 
-        Intent i = getIntent();
-        userName = i.getStringExtra(ExtraNames.NAME);
+        userName = User.name;
         textViewName.setText(userName);
         if(userName.equals(getString(R.string.anonymous_name)))
             loginButton.setVisibility(View.GONE);
@@ -101,13 +103,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this,RoundActivity.class);
-                intent.putExtra(ExtraNames.ROUND,1);
+                intent.putExtra(ExtraNames.ROUND, 1);
                 intent.putExtra(ExtraNames.SCORE,0);
                 startActivity(intent);
 
             }
         };
         newGameButton.setOnClickListener(newGameListener);
+
+        //Ranking Button
+        View.OnClickListener rankingListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this,RankingActivity.class);
+                startActivity(intent);
+
+            }
+        };
+        rankingButton.setOnClickListener(rankingListener);
     }
 
     @Override

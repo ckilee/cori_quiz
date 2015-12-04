@@ -3,6 +3,7 @@ package frolic.br.coriquiz.model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -35,6 +36,23 @@ public class QuizDAO extends QuizDBHelper {
         values.put(QuizContract.Column.RIGHT_ANSWER, q.getRightAnwser());
         // faz o insert
         db.insert(QuizContract.QUESTION_TABLE, null, values);
+        db.close();
+    }
+
+    public void addUserIfNotExist(){
+        //Log.d("QuizDBHelper", "addUser" + user.toString());
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Cria o ContentValues para adicionar: "column"/value
+        ContentValues values = new ContentValues();
+        values.put(QuizContract.Column_User.ID, User.id);
+        values.put(QuizContract.Column_User.Name, User.name);
+        // faz o insert
+        try {
+            db.insert(QuizContract.USER_TABLE, null, values);
+        }catch (SQLiteConstraintException e){
+            e.printStackTrace();
+        }
+
         db.close();
     }
 

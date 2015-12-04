@@ -65,7 +65,7 @@ public class BetweenRoundActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(BetweenRoundActivity.this,RoundActivity.class);
                 intent.putExtra(ExtraNames.ROUND,roundNum+1);
-                intent.putExtra(ExtraNames.ROUND,scoreNum);
+                intent.putExtra(ExtraNames.SCORE,scoreNum);
                 intent.putExtra(ExtraNames.HELP_STATUS,helpStatus);
                 startActivity(intent);
                 finish();
