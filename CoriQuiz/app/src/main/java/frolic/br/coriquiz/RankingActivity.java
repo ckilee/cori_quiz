@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
@@ -35,7 +36,7 @@ public class RankingActivity extends AppCompatActivity {
     }
 
     private void requestScore(){
-        GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(User.fbTokenRequest, "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
+        GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
                 //response.getRawResponse());

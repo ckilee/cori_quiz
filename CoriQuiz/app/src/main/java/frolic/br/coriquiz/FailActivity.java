@@ -72,7 +72,7 @@ public class FailActivity extends AppCompatActivity {
     }
 
     private void requestScore(){
-        GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(User.fbTokenRequest, "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
+        GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
                 //response.getRawResponse());
@@ -115,7 +115,7 @@ public class FailActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        GraphRequestAsyncTask request = GraphRequest.newPostRequest(User.fbTokenRequest, "/" + User.id + "/scores", jsonObject, new GraphRequest.Callback() {
+        GraphRequestAsyncTask request = GraphRequest.newPostRequest(AccessToken.getCurrentAccessToken(), "/" + User.id + "/scores", jsonObject, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
                 Log.i("FailActivity", "response:" + response.getRawResponse() );

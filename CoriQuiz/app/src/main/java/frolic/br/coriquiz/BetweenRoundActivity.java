@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
@@ -106,7 +107,7 @@ public class BetweenRoundActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        GraphRequestAsyncTask request = GraphRequest.newPostRequest(User.fbTokenRequest, "/" + User.id + "/feed", jsonObject, new GraphRequest.Callback() {
+        GraphRequestAsyncTask request = GraphRequest.newPostRequest(AccessToken.getCurrentAccessToken(), "/" + User.id + "/feed", jsonObject, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
                 Log.i("BetweenRoundActivity",response.getRawResponse());
