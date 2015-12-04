@@ -10,5 +10,6 @@ public final class ExtraNames {
     public static final String GOT_RIGHT_ANSWER = "gotrightanswer";
     public static final String HELP_STATUS = "helpstatus";
     public static final String FROM_ESCAPE = "fromescape";
+    public static final String CUR_QUESTION = "curquestion";
 
 }

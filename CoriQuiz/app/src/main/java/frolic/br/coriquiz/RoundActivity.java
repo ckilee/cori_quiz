@@ -242,6 +242,7 @@ public class RoundActivity extends AppCompatActivity {
             intent.putExtra(ExtraNames.SCORE, scoreNum);
             intent.putExtra(ExtraNames.GOT_RIGHT_ANSWER, gotRightAnswer);
             intent.putExtra(ExtraNames.HELP_STATUS, helpStatus);
+            intent.putExtra(ExtraNames.CUR_QUESTION,question.getQuestion());
             startActivity(intent);
         } else{
             Intent intent = new Intent(RoundActivity.this, WinActivity.class);

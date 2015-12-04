@@ -1,6 +1,7 @@
 package frolic.br.coriquiz;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -42,6 +44,7 @@ public class FailActivity extends AppCompatActivity {
     private TextView failTextView;
     private CallbackManager callbackManager;
     private int score = 0;
+    private Button publishScoreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +53,21 @@ public class FailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        failTextView = (TextView)findViewById(R.id.textViewFailMessage);
-        failTextView.setText(getText(R.string.fail_message));
-
         Intent i = getIntent();
         score = i.getIntExtra(ExtraNames.SCORE,0);
+        failTextView = (TextView)findViewById(R.id.textViewFailMessage);
+        failTextView.setText(getText(R.string.fail_message).toString().replace("%score%", Integer.toString(score)));
+        publishScoreButton  = (Button)this.findViewById(R.id.buttonPublishScore);
+        //Publish Score Button
+        View.OnClickListener publishListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                granteePublishActionsPermission();
+            }
+        };
+        publishScoreButton.setOnClickListener(publishListener);
 
-        granteePublishActionsPermission();
-
-
-
+        requestScore();
 
     }
 
@@ -68,7 +76,7 @@ public class FailActivity extends AppCompatActivity {
             @Override
             public void onCompleted(GraphResponse response) {
                 //response.getRawResponse());
-                Log.i("FailActivity","TESTE"+response.getRawResponse());
+
                 JSONArray jarray;
                 JSONObject jobject = response.getJSONObject();
                 jarray = jobject.optJSONArray("data");
@@ -89,8 +97,9 @@ public class FailActivity extends AppCompatActivity {
                 }
 
                 RankingFragment rankingFragment = RankingFragment.newInstance(rankingItemList);
+                Fragment f = getFragmentManager().findFragmentById(R.id.rankingFragment);
 
-                getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.rankingFragment, rankingFragment).commit();
             }
 
         }).executeAsync();
@@ -102,11 +111,6 @@ public class FailActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-          /*  jsonObject.put("name", "teste2");
-            jsonObject.put("caption", "caption");
-            jsonObject.put("description", "teste");
-            jsonObject.put("link", "www.google.comb.br");
-            jsonObject.put("picture", "https://www.google.com.br/images/nav_logo242.png");*/
             jsonObject.put("score", score);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -114,7 +118,7 @@ public class FailActivity extends AppCompatActivity {
         GraphRequestAsyncTask request = GraphRequest.newPostRequest(User.fbTokenRequest, "/" + User.id + "/scores", jsonObject, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
-                Log.i("FailActivity","ERRO:"+response.getRawResponse()+" e "+response.getError());
+                Log.i("FailActivity", "response:" + response.getRawResponse() );
                 requestScore();
             }
 
