@@ -83,6 +83,7 @@ public class Main2Activity extends AppCompatActivity
         if(User.email!=null){
             profileEmailTextView.setText(User.email);
         }
+        profilePictureImageView.setImageResource(R.drawable.cori_logo);
         if(User.picture!=null){
             profilePictureImageView.setImageBitmap(User.picture);
         }

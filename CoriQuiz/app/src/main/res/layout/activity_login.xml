@@ -15,7 +15,8 @@
         android:id="@+id/buttonLoginAnonymous"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/login_button"
-        android:layout_alignStart="@+id/login_button" />
+        android:layout_alignStart="@+id/login_button"
+        android:background="@android:drawable/dialog_holo_light_frame" />
 
     <com.facebook.login.widget.LoginButton
         android:layout_width="wrap_content"

@@ -40,5 +40,6 @@
         android:text="@string/publish_score"
         android:id="@+id/buttonPublishScore"
         android:layout_below="@+id/textViewFailMessage"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@android:drawable/dialog_holo_light_frame" />
 </RelativeLayout>

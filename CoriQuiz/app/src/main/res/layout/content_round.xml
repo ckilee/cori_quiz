@@ -124,7 +124,8 @@
         android:text="@string/answer"
         android:id="@+id/button_answer"
         android:layout_below="@+id/radioGroup"
-        android:layout_alignEnd="@+id/radioGroup" />
+        android:layout_alignEnd="@+id/radioGroup"
+        android:background="@android:drawable/dialog_holo_light_frame" />
 
     <TextView
         android:layout_width="wrap_content"
