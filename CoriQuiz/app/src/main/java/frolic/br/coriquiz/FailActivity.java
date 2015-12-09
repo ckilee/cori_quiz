@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Set;
 
 import frolic.br.coriquiz.fragment.RankingFragment;
+import frolic.br.coriquiz.fragment.RankingNotLogedFragment;
 import frolic.br.coriquiz.model.RankingItem;
 import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.ExtraNames;
@@ -66,43 +67,49 @@ public class FailActivity extends AppCompatActivity {
             }
         };
         publishScoreButton.setOnClickListener(publishListener);
+        if(AccessToken.getCurrentAccessToken() == null) {
+            publishScoreButton.setEnabled(false);
+        }
 
         requestScore();
 
     }
 
     private void requestScore(){
-        GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
-            @Override
-            public void onCompleted(GraphResponse response) {
-                //response.getRawResponse());
+        if(AccessToken.getCurrentAccessToken() != null) {
+            GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
+                @Override
+                public void onCompleted(GraphResponse response) {
+                    //response.getRawResponse());
 
-                JSONArray jarray;
-                JSONObject jobject = response.getJSONObject();
-                jarray = jobject.optJSONArray("data");
-                ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
-                for(int i = 0; i < jarray.length(); i++){
-                    JSONObject scoreObject = null;
-                    JSONObject userObject = null;
-                    try {
-                        scoreObject = jarray.getJSONObject(i);
-                        userObject = scoreObject.getJSONObject("user");
-                        RankingItem rankingItem = new RankingItem(userObject.getString("name"),scoreObject.getString("score"));
-                        rankingItemList.add(rankingItem);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    JSONArray jarray;
+                    JSONObject jobject = response.getJSONObject();
+                    jarray = jobject.optJSONArray("data");
+                    ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
+                    for (int i = 0; i < jarray.length(); i++) {
+                        JSONObject scoreObject = null;
+                        JSONObject userObject = null;
+                        try {
+                            scoreObject = jarray.getJSONObject(i);
+                            userObject = scoreObject.getJSONObject("user");
+                            RankingItem rankingItem = new RankingItem(userObject.getString("name"), scoreObject.getString("score"));
+                            rankingItemList.add(rankingItem);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        //get your values
+
                     }
-                    //get your values
 
+                    RankingFragment rankingFragment = RankingFragment.newInstance(rankingItemList);
+                    getFragmentManager().beginTransaction().replace(R.id.rankingFragment, rankingFragment).commit();
                 }
 
-                RankingFragment rankingFragment = RankingFragment.newInstance(rankingItemList);
-                Fragment f = getFragmentManager().findFragmentById(R.id.rankingFragment);
-
-                getFragmentManager().beginTransaction().replace(R.id.rankingFragment, rankingFragment).commit();
-            }
-
-        }).executeAsync();
+            }).executeAsync();
+        }else{
+            RankingNotLogedFragment rankingNotLogedFragment = RankingNotLogedFragment.newInstance();
+            getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingNotLogedFragment).commit();
+        }
     }
 
     private void publishScore(){

@@ -82,7 +82,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v){
                 Toast.makeText(getApplicationContext(),R.string.login_as_anonymous_message,Toast.LENGTH_LONG).show();
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                Intent i = new Intent(LoginActivity.this, Main2Activity.class);
                 startActivity(i);
 
             }

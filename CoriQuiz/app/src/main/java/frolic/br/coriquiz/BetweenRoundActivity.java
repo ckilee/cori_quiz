@@ -94,6 +94,10 @@ public class BetweenRoundActivity extends AppCompatActivity {
             }
         };
         shareButton.setOnClickListener(shareListener);
+
+        if(AccessToken.getCurrentAccessToken() == null){
+            shareButton.setEnabled(false);
+        }
     }
 
     private void publishShare(){

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
@@ -78,7 +79,6 @@ public class Main2Activity extends AppCompatActivity
         profilePictureImageView = (ImageView) navHeader.findViewById(R.id.imageViewProfilePicture);
         if(User.name!=null){
             profileNameTextView.setText(User.name);
-
         }
         if(User.email!=null){
             profileEmailTextView.setText(User.email);
