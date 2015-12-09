@@ -16,6 +16,8 @@ import frolic.br.coriquiz.utils.Utils;
  */
 public class QuizDAO extends QuizDBHelper {
 
+    private static String notInString = "";
+
     public static final String TAG = QuizDAO.class.getSimpleName();
 
     public QuizDAO(Context context) {
@@ -95,6 +97,7 @@ public class QuizDAO extends QuizDBHelper {
     }
 
     public Question getRandonQuestion(){
+        /*
         String query = "select max("+QuizContract.Column.ID+") from "+QuizContract.QUESTION_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
@@ -107,7 +110,26 @@ public class QuizDAO extends QuizDBHelper {
         Question q = new Question(c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getString(6),Integer.parseInt(c.getString(7)));
 
         db.close();
+        return q;*/
+        Log.i("QuizDAO","notInString:"+notInString);
+
+        String query = "select * from "+QuizContract.QUESTION_TABLE+" where "+QuizContract.Column.ID+" not in ("+notInString+") order by random() limit 11";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+
+        Question q = new Question(c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getString(6),Integer.parseInt(c.getString(7)));
+        if(notInString.isEmpty()){
+            notInString = "'"+c.getString(0)+"'";
+        }else{
+            notInString = notInString+",'"+c.getString(0)+"'";
+        }
+
+        db.close();
         return q;
     }
 
+    public static void resetNotInString() {
+        QuizDAO.notInString = "";
+    }
 }

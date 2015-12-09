@@ -118,6 +118,7 @@ public class Main2Activity extends AppCompatActivity
         View.OnClickListener newGameListener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                QuizDAO.resetNotInString();
                 Intent intent = new Intent(Main2Activity.this,RoundActivity.class);
                 intent.putExtra(ExtraNames.ROUND, 1);
                 intent.putExtra(ExtraNames.SCORE,0);
