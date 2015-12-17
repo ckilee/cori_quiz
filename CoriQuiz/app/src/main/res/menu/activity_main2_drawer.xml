@@ -16,7 +16,11 @@
     <item android:title="@string/Menu">
         <menu>
             <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/share" />
+
+            <item android:id="@+id/nav_ranking" android:icon="@drawable/trophy_icon"
+                android:title="@string/ranking" />
+
             <item android:id="@+id/nav_logout" android:icon="@drawable/ic_exit_to_app_black"
                 android:title="@string/logout" />
         </menu>

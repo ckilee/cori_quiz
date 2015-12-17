@@ -31,14 +31,11 @@ import frolic.br.coriquiz.utils.ExtraNames;
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button shareButton;
     private Button newGameButton;
-    private Button rankingButton;
     private TextView textViewName;
     private QuizDAO quizDAO;
     private String userName;
     private CallbackManager callbackManager;
-    private LoginButton loginButton;
     private TextView profileNameTextView;
     private TextView profileEmailTextView;
     private ImageView profilePictureImageView;
@@ -49,15 +46,6 @@ public class Main2Activity extends AppCompatActivity
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,9 +58,7 @@ public class Main2Activity extends AppCompatActivity
         View navHeader = navigationView.getHeaderView(0);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-        shareButton = (Button) findViewById(R.id.button_share);
         newGameButton = (Button) findViewById(R.id.button_new_game);
-        rankingButton = (Button) findViewById(R.id.button_ranking);
         textViewName = (TextView) findViewById(R.id.textViewName);
         profileNameTextView = (TextView) navHeader.findViewById(R.id.textViewProfileName);
         profileEmailTextView = (TextView) navHeader.findViewById(R.id.textViewProfileEmail);
@@ -95,25 +81,12 @@ public class Main2Activity extends AppCompatActivity
         userName = User.name;
         textViewName.setText(userName);
 
+        this.setTitle(R.string.app_name);
+
 
     }
 
     private void configureViews() {
-        //Share Button
-        View.OnClickListener shareListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                String message = getString(R.string.app_name)+" - https://play.google.com/store/apps/details?id=frolic.br.coriquiz";
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.putExtra(Intent.EXTRA_TEXT, message);
-
-                startActivity(Intent.createChooser(share, getString(R.string.app_name)));
-
-            }
-        };
-        shareButton.setOnClickListener(shareListener);
-
         //New Game Button
         View.OnClickListener newGameListener = new View.OnClickListener() {
             @Override
@@ -127,17 +100,6 @@ public class Main2Activity extends AppCompatActivity
             }
         };
         newGameButton.setOnClickListener(newGameListener);
-
-        //Ranking Button
-        View.OnClickListener rankingListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(Main2Activity.this,RankingActivity.class);
-                startActivity(intent);
-
-            }
-        };
-        rankingButton.setOnClickListener(rankingListener);
     }
 
     @Override
@@ -153,7 +115,7 @@ public class Main2Activity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main2, menu);
+        //getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
 
@@ -185,20 +147,19 @@ public class Main2Activity extends AppCompatActivity
             finish();
 
         }
-        /*
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        else if(id==R.id.nav_share){
+            String message = getString(R.string.app_name)+" - https://play.google.com/store/apps/details?id=frolic.br.coriquiz";
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.putExtra(Intent.EXTRA_TEXT, message);
 
-        } else if (id == R.id.nav_slideshow) {
+            startActivity(Intent.createChooser(share, getString(R.string.app_name)));
+        }
+        else if(id==R.id.nav_ranking){
+            Intent intent = new Intent(Main2Activity.this,RankingActivity.class);
+            startActivity(intent);
+        }
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

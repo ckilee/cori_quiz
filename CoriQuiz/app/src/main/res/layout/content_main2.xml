@@ -14,17 +14,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/cori_logo" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/app_name"
-        android:id="@+id/textView"
-        android:layout_below="@+id/imageView"
+        android:background="@drawable/cori_logo"
+        android:layout_below="@+id/textViewName"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -32,30 +23,9 @@
         android:layout_height="wrap_content"
         android:text="@string/new_game"
         android:id="@+id/button_new_game"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="38dp"
-        android:background="@android:drawable/dialog_holo_light_frame" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ranking"
-        android:id="@+id/button_ranking"
-        android:layout_below="@+id/button_new_game"
-        android:layout_alignEnd="@+id/button_new_game"
-        android:layout_alignStart="@+id/button_new_game"
-        android:background="@android:drawable/dialog_holo_light_frame" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/share"
-        android:id="@+id/button_share"
-        android:layout_below="@+id/button_ranking"
-        android:layout_alignEnd="@+id/button_ranking"
-        android:layout_alignStart="@+id/button_ranking"
-        android:background="@android:drawable/dialog_holo_light_frame" />
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/imageView" />
 
     <TextView
         android:layout_width="wrap_content"
