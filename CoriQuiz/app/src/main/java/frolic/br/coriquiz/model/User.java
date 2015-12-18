@@ -12,6 +12,7 @@ public class User {
     public static String id;
     public static String name;
     public static String email;
+    public static String pictureUrl;
     public static Bitmap picture;
 
 }

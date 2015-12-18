@@ -74,7 +74,7 @@ public class LoginActivity extends Activity {
         }
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
         onFbLogin();
 
         //Anonymous login Button
@@ -103,23 +103,26 @@ public class LoginActivity extends Activity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         final AccessToken accessToken = loginResult.getAccessToken();
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id,name,email,picture");
 
-                        GraphRequestAsyncTask request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject userJson, GraphResponse graphResponse) {
                                 User.id = userJson.optString("id");
                                 User.name = userJson.optString("name");
                                 User.email = userJson.optString("email");
-                                addToSharedPreferences(User.name, User.email, User.id);
+                                addToSharedPreferences(User.name, User.email, User.id, User.pictureUrl);
 
                                 if (userJson.has("picture")) {
-                                    String profilePicUrl = null;
+
                                     try {
-                                        profilePicUrl = userJson.getJSONObject("picture").getJSONObject("data").getString("url");
+                                        User.pictureUrl = userJson.getJSONObject("picture").getJSONObject("data").getString("url");
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    User.picture = getFacebookProfilePicture(profilePicUrl);
+                                    //User.picture = getFacebookProfilePicture(User.pictureUrl);
+
                                 }
                                 //quizDAO.addUserIfNotExist();
                                 Log.i("LoginActivity", "onSucess");
@@ -127,7 +130,11 @@ public class LoginActivity extends Activity {
                                 startActivity(i);
                                 finish();
                             }
-                        }).executeAsync();
+                        });
+                        request.setParameters(parameters);
+
+                        GraphRequestAsyncTask requestAssyncTask = new GraphRequestAsyncTask(request);
+                        requestAssyncTask.execute();
 
                     }
 
@@ -143,12 +150,13 @@ public class LoginActivity extends Activity {
                 });
     }
 
-    public void addToSharedPreferences(String name, String email, String id){
+    public void addToSharedPreferences(String name, String email, String id, String pictureUrl){
         SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(ExtraNames.USER_NAME_PREFS,name);
         editor.putString(ExtraNames.USER_EMAIL_PREFS,email);
         editor.putString(ExtraNames.USER_ID_PREFS,id);
+        editor.putString(ExtraNames.USER_PICTURE_PREFS,pictureUrl);
         editor.commit();
     }
 
@@ -157,23 +165,10 @@ public class LoginActivity extends Activity {
         User.email = sharedPreferences.getString(ExtraNames.USER_EMAIL_PREFS,"");
         User.name = sharedPreferences.getString(ExtraNames.USER_NAME_PREFS,"");
         User.id = sharedPreferences.getString(ExtraNames.USER_ID_PREFS,"");
+        User.pictureUrl= sharedPreferences.getString(ExtraNames.USER_PICTURE_PREFS,"");
     }
 
-    public static Bitmap getFacebookProfilePicture(String urlString){
-        URL url = null;
-        try {
-            url = new URL(urlString);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        Bitmap bitmap = null;
-        try {
-            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

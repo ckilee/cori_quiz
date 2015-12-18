@@ -1,6 +1,10 @@
 package frolic.br.coriquiz;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Picture;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +29,10 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import frolic.br.coriquiz.model.QuizDAO;
 import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.ExtraNames;
@@ -31,7 +40,12 @@ import frolic.br.coriquiz.utils.ExtraNames;
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button newGameButton;
+    private Button chatButton;
+    private ImageButton round1Button;
+    private ImageButton round2Button;
+    private ImageButton round3Button;
+    private ImageButton round4Button;
+    private ImageButton round5Button;
     private TextView textViewName;
     private QuizDAO quizDAO;
     private String userName;
@@ -58,8 +72,12 @@ public class Main2Activity extends AppCompatActivity
         View navHeader = navigationView.getHeaderView(0);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-        newGameButton = (Button) findViewById(R.id.button_new_game);
-        textViewName = (TextView) findViewById(R.id.textViewName);
+        chatButton = (Button) findViewById(R.id.button_chat);
+        round1Button = (ImageButton) findViewById(R.id.imageButtonround1);
+        round2Button = (ImageButton) findViewById(R.id.imageButtonround2);
+        round3Button = (ImageButton) findViewById(R.id.imageButtonround3);
+        round4Button = (ImageButton) findViewById(R.id.imageButtonround4);
+        round5Button = (ImageButton) findViewById(R.id.imageButtonround5);
         profileNameTextView = (TextView) navHeader.findViewById(R.id.textViewProfileName);
         profileEmailTextView = (TextView) navHeader.findViewById(R.id.textViewProfileEmail);
         profilePictureImageView = (ImageView) navHeader.findViewById(R.id.imageViewProfilePicture);
@@ -70,25 +88,34 @@ public class Main2Activity extends AppCompatActivity
             profileEmailTextView.setText(User.email);
         }
         profilePictureImageView.setImageResource(R.drawable.cori_logo);
-        if(User.picture!=null){
-            profilePictureImageView.setImageBitmap(User.picture);
-        }
+        new GetFacebookImageProfileTask().execute(User.pictureUrl);
+
 
         configureViews();
         quizDAO = new QuizDAO(getApplicationContext());
         quizDAO.addDefaultValues();
 
         userName = User.name;
-        textViewName.setText(userName);
 
-        this.setTitle(R.string.app_name);
+        this.setTitle(R.string.choose_round);
 
 
     }
 
     private void configureViews() {
+
         //New Game Button
-        View.OnClickListener newGameListener = new View.OnClickListener() {
+        View.OnClickListener chatListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+
+
+            }
+        };
+        chatButton.setOnClickListener(chatListener);
+
+        //round 1 Button
+        View.OnClickListener round1Listener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 QuizDAO.resetNotInString();
@@ -99,7 +126,7 @@ public class Main2Activity extends AppCompatActivity
 
             }
         };
-        newGameButton.setOnClickListener(newGameListener);
+        round1Button.setOnClickListener(round1Listener);
     }
 
     @Override
@@ -171,5 +198,47 @@ public class Main2Activity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void getFacebookImage(){
+        if(User.pictureUrl!=null){
+
+        }
+    }
+
+    public static Bitmap getFacebookProfilePicture(String urlString){
+        URL url = null;
+        try {
+            url = new URL(urlString);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (NullPointerException ne){
+            ne.printStackTrace();
+            bitmap = null;
+        }
+        return bitmap;
+    }
+
+    private class GetFacebookImageProfileTask extends AsyncTask<String, Void, Bitmap> {
+        protected Bitmap doInBackground(String... urls) {
+            String urlPath;
+            if(urls!=null && urls.length>0)
+                urlPath = urls[0];
+            else
+                urlPath = null;
+            return getFacebookProfilePicture(urls[0]);
+        }
+
+        protected void onPostExecute(Bitmap bitmap) {
+            if(bitmap!=null)
+                profilePictureImageView.setImageBitmap(bitmap);
+        }
     }
 }

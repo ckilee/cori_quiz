@@ -30,6 +30,9 @@
     <string name="title_activity_fail">FailActivity</string>
     <string name="title_activity_win">WinActivity</string>
     <string name="title_ranking">Ranking</string>
+    <string name="choose_round">Selecione a rodada</string>
+    <string name="chat_timao">Chat do Timão</string>
+    <string name="send">Enviar</string>
     <string name="Name">Nome</string>
     <string name="Score">Score</string>
     <string name="Menu">Opções</string>
@@ -37,6 +40,17 @@
     <string name="anonymous_name">Anônimo</string>
     <string name="app_id">876336285821169</string>
     <string name="app_acess_token">876336285821169|ScJeTM2IuYDPlfp2fmJbZnPpx-A</string>
+    <string name="message_welcome">Bem vindo ao chat do Corinthians</string>
+    <string name="connection_error">Erro ao conectar com o servidor!</string>
+    <string name="message_user_joined">%s entrou</string>
+    <string name="message_user_left">%s saiu</string>
+    <string name="user_action_typing">está digitando</string>
+
+    <plurals name="message_participants">
+        <item quantity="one">Há %d participante</item>
+        <item quantity="other">Há %d participantes</item>
+    </plurals>
+
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
