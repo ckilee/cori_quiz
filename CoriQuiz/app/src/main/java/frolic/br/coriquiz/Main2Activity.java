@@ -53,6 +53,8 @@ public class Main2Activity extends AppCompatActivity
     private TextView profileNameTextView;
     private TextView profileEmailTextView;
     private ImageView profilePictureImageView;
+    private static final int CHAT_REQUEST_CODE = 0;
+    private final static int CHAT_CONNECTION_ERROR = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +106,11 @@ public class Main2Activity extends AppCompatActivity
 
     private void configureViews() {
 
-        //New Game Button
+        //Chat Button
         View.OnClickListener chatListener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
-
+                attemptToConnect();
 
             }
         };
@@ -196,8 +198,11 @@ public class Main2Activity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == CHAT_REQUEST_CODE && resultCode == CHAT_CONNECTION_ERROR){
+            Toast.makeText(this, getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+        }else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void getFacebookImage(){
@@ -239,6 +244,20 @@ public class Main2Activity extends AppCompatActivity
         protected void onPostExecute(Bitmap bitmap) {
             if(bitmap!=null)
                 profilePictureImageView.setImageBitmap(bitmap);
+        }
+    }
+
+    private void attemptToConnect() {
+        if(User.name==null){
+            Toast.makeText(getApplicationContext(),R.string.must_be_loged_to_enter_in_chat,Toast.LENGTH_LONG).show();
+        }else {
+            Intent connectIntent = new Intent(this, ChatActivity.class);
+            connectIntent.putExtra("identification", User.name);
+            connectIntent.putExtra("address", "nodejs-ckilee.rhcloud.com");
+            connectIntent.putExtra("port", 8000);
+
+            //startActivityForResult(connectIntent, CHAT_REQUEST_CODE);
+            startActivity(connectIntent);
         }
     }
 }

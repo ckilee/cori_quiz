@@ -112,7 +112,7 @@ public class LoginActivity extends Activity {
                                 User.id = userJson.optString("id");
                                 User.name = userJson.optString("name");
                                 User.email = userJson.optString("email");
-                                addToSharedPreferences(User.name, User.email, User.id, User.pictureUrl);
+
 
                                 if (userJson.has("picture")) {
 
@@ -124,6 +124,7 @@ public class LoginActivity extends Activity {
                                     //User.picture = getFacebookProfilePicture(User.pictureUrl);
 
                                 }
+                                addToSharedPreferences(User.name, User.email, User.id, User.pictureUrl);
                                 //quizDAO.addUserIfNotExist();
                                 Log.i("LoginActivity", "onSucess");
                                 Intent i = new Intent(LoginActivity.this, Main2Activity.class);

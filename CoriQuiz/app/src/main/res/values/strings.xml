@@ -19,6 +19,7 @@
     <string name="using_coach_help">O técnico te ajudou removendo randomicamente duas perguntas. É nóis curinthians!</string>
     <string name="using_escape_help">Você fugiu do BO junto com nóis! Bora para a próxima pergunta!</string>
     <string name="must_be_loged_to_display_ranking">Você precisa estar logado no facebook para mostrar o ranking com os melhores escores seu e de seus amigos</string>
+    <string name="must_be_loged_to_enter_in_chat">Você precisa estar logado no facebook para poder participar do chat</string>
     <string name="share_hit_question_in_between_round" formatted="false"> é louco pelo Corinthians!!! =D Já conquistou %pontos% pontos no Quiz e acertou a pergunta: %question% Responda o Quiz e mostre para o mundo todo que você é um torcedor louco pelo Corinthians</string>
     <string name="have_shared">Você compartilhou um post via facebook</string>
     <string name="have_logged_out">Logout efetuado</string>
