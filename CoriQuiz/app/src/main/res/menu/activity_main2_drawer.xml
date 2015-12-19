@@ -21,6 +21,9 @@
             <item android:id="@+id/nav_ranking" android:icon="@drawable/trophy_icon"
                 android:title="@string/ranking" />
 
+            <item android:id="@+id/nav_chat" android:icon="@drawable/chat"
+                android:title="@string/chat_cheering" />
+
             <item android:id="@+id/nav_logout" android:icon="@drawable/ic_exit_to_app_black"
                 android:title="@string/logout" />
         </menu>

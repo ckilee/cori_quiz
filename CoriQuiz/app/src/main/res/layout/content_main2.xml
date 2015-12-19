@@ -11,28 +11,16 @@
     android:background="@drawable/backgroundmain">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:id="@+id/imageView"
-        android:background="@drawable/cori_logo"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:paddingRight="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/chat_timao"
-        android:id="@+id/button_chat"
-
-        android:textAlignment="viewEnd"
-        android:layout_alignParentBottom="true"
+        android:background="@drawable/cori_logo_main2"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButtonround1"
-        android:layout_marginTop="26dp"
         android:background="@drawable/rodada1"
         android:layout_below="@+id/imageView"
         android:layout_alignParentStart="true" />

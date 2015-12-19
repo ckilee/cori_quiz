@@ -40,7 +40,6 @@ import frolic.br.coriquiz.utils.ExtraNames;
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button chatButton;
     private ImageButton round1Button;
     private ImageButton round2Button;
     private ImageButton round3Button;
@@ -74,7 +73,6 @@ public class Main2Activity extends AppCompatActivity
         View navHeader = navigationView.getHeaderView(0);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-        chatButton = (Button) findViewById(R.id.button_chat);
         round1Button = (ImageButton) findViewById(R.id.imageButtonround1);
         round2Button = (ImageButton) findViewById(R.id.imageButtonround2);
         round3Button = (ImageButton) findViewById(R.id.imageButtonround3);
@@ -106,15 +104,6 @@ public class Main2Activity extends AppCompatActivity
 
     private void configureViews() {
 
-        //Chat Button
-        View.OnClickListener chatListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                attemptToConnect();
-
-            }
-        };
-        chatButton.setOnClickListener(chatListener);
 
         //round 1 Button
         View.OnClickListener round1Listener = new View.OnClickListener() {
@@ -187,6 +176,9 @@ public class Main2Activity extends AppCompatActivity
         else if(id==R.id.nav_ranking){
             Intent intent = new Intent(Main2Activity.this,RankingActivity.class);
             startActivity(intent);
+        }
+        else if(id==R.id.nav_chat){
+            attemptToConnect();
         }
 
 
