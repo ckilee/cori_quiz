@@ -48,6 +48,9 @@
     <string name="message_user_left">%s saiu</string>
     <string name="user_action_typing">está digitando</string>
 
+    <string name="reset_score">Limpar Score</string>
+    <string name="score_has_been_reset">O Score atual foi limpo</string>
+
     <plurals name="message_participants">
         <item quantity="one">Há %d participante</item>
         <item quantity="other">Há %d participantes</item>

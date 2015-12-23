@@ -1,6 +1,8 @@
 package frolic.br.coriquiz;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import frolic.br.coriquiz.model.Question;
 import frolic.br.coriquiz.model.QuizDAO;
+import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.ExtraNames;
 import frolic.br.coriquiz.utils.Utils;
 
@@ -35,6 +38,7 @@ public class RoundActivity extends AppCompatActivity {
     private int helpStatus = 0;
     private int rightAnswer = 0;
     private int roundNum = 1;
+    private final int MAX_ROUND_NUM = 5;
     private int scoreNum = 0;
     private boolean gotRightAnswer = false;
 
@@ -74,7 +78,7 @@ public class RoundActivity extends AppCompatActivity {
         roundNum = intent.getIntExtra(ExtraNames.ROUND, 1);
         scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
         helpStatus = intent.getIntExtra(ExtraNames.HELP_STATUS, 0);
-        String round = roundNum+"/10";
+        String round = roundNum+"/"+MAX_ROUND_NUM;
         roundNuberTV.setText(round);
 
         disableHelp(helpStatus);
@@ -154,6 +158,7 @@ public class RoundActivity extends AppCompatActivity {
         gotRightAnswer = false;
         if(rightAnswer==1 && answer1.isChecked()||rightAnswer==2 && answer2.isChecked()||rightAnswer==3 && answer3.isChecked()||rightAnswer==4 && answer4.isChecked()||rightAnswer==5 && answer5.isChecked()) {
             scoreNum = scoreNum + roundNum * 100;
+
             gotRightAnswer = true;
         }
 
@@ -219,7 +224,7 @@ public class RoundActivity extends AppCompatActivity {
     }
 
     private void proceedToNewActivityFromEscape(){
-        if( roundNum !=10) {
+        if( roundNum !=MAX_ROUND_NUM) {
             Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
             intent.putExtra(ExtraNames.ROUND, roundNum);
             intent.putExtra(ExtraNames.SCORE, scoreNum);
@@ -228,6 +233,8 @@ public class RoundActivity extends AppCompatActivity {
             intent.putExtra(ExtraNames.FROM_ESCAPE, true);
             startActivity(intent);
         } else{
+            updateScoreOnSharedPreferences(scoreNum);
+            incLevelOnSharedPreferences();
             Intent intent = new Intent(RoundActivity.this, WinActivity.class);
             intent.putExtra(ExtraNames.ROUND, roundNum);
             intent.putExtra(ExtraNames.SCORE, scoreNum);
@@ -236,7 +243,7 @@ public class RoundActivity extends AppCompatActivity {
     }
 
     private void proceedToNewActivity(){
-        if( roundNum !=10) {
+        if( roundNum !=MAX_ROUND_NUM) {
             Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
             intent.putExtra(ExtraNames.ROUND, roundNum);
             intent.putExtra(ExtraNames.SCORE, scoreNum);
@@ -245,12 +252,35 @@ public class RoundActivity extends AppCompatActivity {
             intent.putExtra(ExtraNames.CUR_QUESTION,question.getQuestion());
             startActivity(intent);
         } else{
+            updateScoreOnSharedPreferences(scoreNum);
+            incLevelOnSharedPreferences();
             Intent intent = new Intent(RoundActivity.this, WinActivity.class);
             intent.putExtra(ExtraNames.ROUND, roundNum);
             intent.putExtra(ExtraNames.SCORE, scoreNum);
             startActivity(intent);
         }
     }
+
+    public void updateScoreOnSharedPreferences(int newScore){
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(ExtraNames.USER_SCORE_PREFS,newScore);
+        editor.commit();
+    }
+
+    public void incLevelOnSharedPreferences(){
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS,Context.MODE_PRIVATE);
+        int curLevel = sharedPreferences.getInt(ExtraNames.USER_LEVEL_PREFS, 0);
+        curLevel++;
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(ExtraNames.USER_LEVEL_PREFS,curLevel);
+        editor.commit();
+
+
+    }
+
+
 
 
 }

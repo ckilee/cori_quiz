@@ -10,7 +10,7 @@
         <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
             android:title="Slideshow" />
         <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Tools" />reset_score
     </group>  -->
 
     <item android:title="@string/Menu">
@@ -23,6 +23,9 @@
 
             <item android:id="@+id/nav_chat" android:icon="@drawable/chat"
                 android:title="@string/chat_cheering" />
+
+            <item android:id="@+id/nav_reset_score" android:icon="@drawable/trash"
+                android:title="@string/reset_score" />
 
             <item android:id="@+id/nav_logout" android:icon="@drawable/ic_exit_to_app_black"
                 android:title="@string/logout" />

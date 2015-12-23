@@ -81,6 +81,7 @@ public class ChatActivity extends AppCompatActivity implements ActivityGenericsI
             mSocket.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
+            setResult(RESULT_CANCELED);
             finish();
         }
 
@@ -111,6 +112,7 @@ public class ChatActivity extends AppCompatActivity implements ActivityGenericsI
             getSupportActionBar().setHomeButtonEnabled(true);
         } catch (Exception e){
             Log.e("chat application", e.getMessage());
+            setResult(RESULT_CANCELED);
             finish();
         }
 

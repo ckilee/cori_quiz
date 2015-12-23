@@ -1,6 +1,8 @@
 package frolic.br.coriquiz;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Picture;
@@ -53,11 +55,20 @@ public class Main2Activity extends AppCompatActivity
     private TextView profileEmailTextView;
     private ImageView profilePictureImageView;
     private static final int CHAT_REQUEST_CODE = 0;
+    private static final int ROUND_REQUEST_CODE = 1;
     private final static int CHAT_CONNECTION_ERROR = 1;
+    private int curScore = 0;
+    private int curLevel = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initializing();
+
+    }
+
+    private void initializing(){
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -97,27 +108,91 @@ public class Main2Activity extends AppCompatActivity
 
         userName = User.name;
 
+        curScore = getScoreFromSharedPreferences();
+        curLevel = getLevelSharedPreferences();
+
+        setGameLevel();
+
         this.setTitle(R.string.choose_round);
+    }
 
+    private void setGameLevel() {
+        if(curLevel==0){
+            round1Button.setEnabled(true);
+            round2Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round2Button.setEnabled(false);
+            round3Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round3Button.setEnabled(false);
+            round4Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round4Button.setEnabled(false);
+            round5Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round5Button.setEnabled(false);
+        }else if(curLevel==1){
+            round1Button.setEnabled(false);
+            round1Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round2Button.setEnabled(true);
+            round3Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round3Button.setEnabled(false);
+            round4Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round4Button.setEnabled(false);
+            round5Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round5Button.setEnabled(true);
+        }
+        else if(curLevel==2){
+            round1Button.setEnabled(false);
+            round1Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round2Button.setEnabled(false);
+            round2Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round3Button.setEnabled(true);
+            round4Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round4Button.setEnabled(false);
+            round5Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+            round5Button.setEnabled(false);
+        }
+        else if(curLevel==3){
+            round1Button.setEnabled(false);
+            round1Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round2Button.setEnabled(false);
+            round2Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round3Button.setEnabled(false);
+            round3Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round4Button.setEnabled(true);
+            round5Button.setEnabled(false);
+            round5Button.setBackgroundResource(R.drawable.rodada_bloqueada);
+        }
+        else if(curLevel==4){
+            round1Button.setEnabled(false);
+            round1Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round2Button.setEnabled(false);
+            round2Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round3Button.setEnabled(false);
+            round3Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round4Button.setEnabled(false);
+            round4Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round5Button.setEnabled(true);
 
+        }
     }
 
     private void configureViews() {
 
 
-        //round 1 Button
+        //round Button
         View.OnClickListener round1Listener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 QuizDAO.resetNotInString();
                 Intent intent = new Intent(Main2Activity.this,RoundActivity.class);
                 intent.putExtra(ExtraNames.ROUND, 1);
-                intent.putExtra(ExtraNames.SCORE,0);
-                startActivity(intent);
-
+                intent.putExtra(ExtraNames.SCORE, curScore);
+                startActivityForResult(intent,ROUND_REQUEST_CODE);
             }
         };
         round1Button.setOnClickListener(round1Listener);
+        round2Button.setOnClickListener(round1Listener);
+        round3Button.setOnClickListener(round1Listener);
+        round4Button.setOnClickListener(round1Listener);
+        round5Button.setOnClickListener(round1Listener);
     }
 
     @Override
@@ -170,12 +245,20 @@ public class Main2Activity extends AppCompatActivity
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
             share.putExtra(Intent.EXTRA_TEXT, message);
-
             startActivity(Intent.createChooser(share, getString(R.string.app_name)));
         }
         else if(id==R.id.nav_ranking){
             Intent intent = new Intent(Main2Activity.this,RankingActivity.class);
             startActivity(intent);
+        }
+        else if(id==R.id.nav_reset_score){
+            SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS,Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove(ExtraNames.USER_LEVEL_PREFS);
+            editor.remove(ExtraNames.USER_SCORE_PREFS);
+            editor.commit();
+            Toast.makeText(getApplicationContext(),R.string.score_has_been_reset,Toast.LENGTH_LONG).show();
+            initializing();
         }
         else if(id==R.id.nav_chat){
             attemptToConnect();
@@ -192,7 +275,13 @@ public class Main2Activity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == CHAT_REQUEST_CODE && resultCode == CHAT_CONNECTION_ERROR){
             Toast.makeText(this, getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
-        }else {
+        }else if(requestCode == ROUND_REQUEST_CODE ){
+            curScore = getScoreFromSharedPreferences();
+            curLevel = getLevelSharedPreferences();
+
+            setGameLevel();
+        }
+        else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -248,8 +337,18 @@ public class Main2Activity extends AppCompatActivity
             connectIntent.putExtra("address", "nodejs-ckilee.rhcloud.com");
             connectIntent.putExtra("port", 8000);
 
-            //startActivityForResult(connectIntent, CHAT_REQUEST_CODE);
-            startActivity(connectIntent);
+            startActivityForResult(connectIntent, CHAT_REQUEST_CODE);
+            //startActivity(connectIntent);
         }
+    }
+
+    public int getScoreFromSharedPreferences(){
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(ExtraNames.USER_SCORE_PREFS,0);
+    }
+
+    public int getLevelSharedPreferences(){
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(ExtraNames.USER_LEVEL_PREFS,0);
     }
 }

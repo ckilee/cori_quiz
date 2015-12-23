@@ -12,6 +12,8 @@ public final class ExtraNames {
     public static final String FROM_ESCAPE = "fromescape";
     public static final String CUR_QUESTION = "curquestion";
     public static final String MY_PREFS = "myprefs";
+    public static final String USER_SCORE_PREFS = "userscoreprefs";
+    public static final String USER_LEVEL_PREFS = "userlevelprefs";
     public static final String USER_NAME_PREFS = "usernameprefs";
     public static final String USER_EMAIL_PREFS = "useremailprefs";
     public static final String USER_ID_PREFS = "useridprefs";
