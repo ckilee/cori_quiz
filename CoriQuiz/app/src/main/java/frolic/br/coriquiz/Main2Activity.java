@@ -273,12 +273,13 @@ public class Main2Activity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == CHAT_REQUEST_CODE && resultCode == CHAT_CONNECTION_ERROR){
-            Toast.makeText(this, getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+        if(requestCode == CHAT_REQUEST_CODE) {
+            if (resultCode == CHAT_CONNECTION_ERROR) {
+                Toast.makeText(this, getResources().getString(R.string.connection_error), Toast.LENGTH_LONG).show();
+            }
         }else if(requestCode == ROUND_REQUEST_CODE ){
             curScore = getScoreFromSharedPreferences();
             curLevel = getLevelSharedPreferences();
-
             setGameLevel();
         }
         else {
