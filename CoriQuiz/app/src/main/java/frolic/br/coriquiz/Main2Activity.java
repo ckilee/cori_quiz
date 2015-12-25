@@ -129,20 +129,20 @@ public class Main2Activity extends AppCompatActivity
             round5Button.setEnabled(false);
         }else if(curLevel==1){
             round1Button.setEnabled(false);
-            round1Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round1Button.setBackgroundResource(R.drawable.rodada_completa1);
             round2Button.setEnabled(true);
             round3Button.setBackgroundResource(R.drawable.rodada_bloqueada);
             round3Button.setEnabled(false);
             round4Button.setBackgroundResource(R.drawable.rodada_bloqueada);
             round4Button.setEnabled(false);
             round5Button.setBackgroundResource(R.drawable.rodada_bloqueada);
-            round5Button.setEnabled(true);
+            round5Button.setEnabled(false);
         }
         else if(curLevel==2){
             round1Button.setEnabled(false);
-            round1Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round1Button.setBackgroundResource(R.drawable.rodada_completa1);
             round2Button.setEnabled(false);
-            round2Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round2Button.setBackgroundResource(R.drawable.rodada_completa2);
             round3Button.setEnabled(true);
             round4Button.setBackgroundResource(R.drawable.rodada_bloqueada);
             round4Button.setEnabled(false);
@@ -151,24 +151,24 @@ public class Main2Activity extends AppCompatActivity
         }
         else if(curLevel==3){
             round1Button.setEnabled(false);
-            round1Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round1Button.setBackgroundResource(R.drawable.rodada_completa1);
             round2Button.setEnabled(false);
-            round2Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round2Button.setBackgroundResource(R.drawable.rodada_completa2);
             round3Button.setEnabled(false);
-            round3Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round3Button.setBackgroundResource(R.drawable.rodada_completa3);
             round4Button.setEnabled(true);
             round5Button.setEnabled(false);
             round5Button.setBackgroundResource(R.drawable.rodada_bloqueada);
         }
         else if(curLevel==4){
             round1Button.setEnabled(false);
-            round1Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round1Button.setBackgroundResource(R.drawable.rodada_completa1);
             round2Button.setEnabled(false);
-            round2Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round2Button.setBackgroundResource(R.drawable.rodada_completa2);
             round3Button.setEnabled(false);
-            round3Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round3Button.setBackgroundResource(R.drawable.rodada_completa3);
             round4Button.setEnabled(false);
-            round4Button.setBackgroundResource(R.drawable.rodadacompleta);
+            round4Button.setBackgroundResource(R.drawable.rodada_completa4);
             round5Button.setEnabled(true);
 
         }
