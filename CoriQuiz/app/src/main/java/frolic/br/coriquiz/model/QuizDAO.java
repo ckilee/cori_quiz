@@ -67,8 +67,10 @@ public class QuizDAO extends QuizDBHelper {
     }
 
     public void addDefaultValues(){
+
         if(!isDBEmpty())
             return;
+        Log.i("QuizDAO","Adding default values");
         Question q1=new Question("Quais são os nomes dos ex jogadores do Corinthians que foram embora para o Flamengo?","Emerson e Gil", "Emerson e Guerrero", "Guerrero e Danilo", "Luciano e Malcom", "Ralf e Fagner", 2);
         this.addQuestion(q1);
         Question q2=new Question("Qual foi o time que o Corinthians enfrentou e venceu por 5 a 3 no Paulistão 2015?", "Penapolense", "Palmeiras", "Santos", "Ituano", "Bragantino", 1);
@@ -100,7 +102,7 @@ public class QuizDAO extends QuizDBHelper {
     private boolean isDBEmpty(){
         boolean isDBEmpty = true;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(QuizContract.QUESTION_TABLE, new String[]{QuizContract.Column.ID}, QuizContract.Column.ID + " = ?", new String[]{"1"}, null, null, null);
+        Cursor c = db.query(QuizContract.QUESTION_TABLE, new String[]{QuizContract.Column.ID}, null, null, null, null, null,"2");
 
         if(c.getCount()>0)
             isDBEmpty = false;
