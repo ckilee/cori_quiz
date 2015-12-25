@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.List;
 import java.util.Random;
 
 import frolic.br.coriquiz.utils.Utils;
@@ -58,6 +59,13 @@ public class QuizDAO extends QuizDBHelper {
         db.close();
     }
 
+    public void clearTable(String tableName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // faz o insert
+        db.delete(tableName,null,null);
+        db.close();
+    }
+
     public void addDefaultValues(){
         if(!isDBEmpty())
             return;
@@ -81,6 +89,12 @@ public class QuizDAO extends QuizDBHelper {
         this.addQuestion(q9);
         Question q10=new Question("Qual foi o placar da partida em que o São Paulo venceu o Corinthians na Libertadores 2015?","2 a 0","3 a 0","3 a 2","1 a 0", "2 a 1", 1);
         this.addQuestion(q10);
+    }
+
+    public void addQuestions(List<Question> questionList){
+        for (Question curQuestion:questionList) {
+            this.addQuestion(curQuestion);
+        }
     }
 
     private boolean isDBEmpty(){

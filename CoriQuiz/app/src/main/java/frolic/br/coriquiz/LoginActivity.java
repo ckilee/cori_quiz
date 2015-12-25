@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ import java.util.concurrent.TimeoutException;
 import frolic.br.coriquiz.model.QuizDAO;
 import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.ExtraNames;
+import frolic.br.coriquiz.model.EndpointsAsyncTask;
 
 public class LoginActivity extends Activity {
     private CallbackManager callbackManager;
@@ -88,6 +90,8 @@ public class LoginActivity extends Activity {
             }
         };
         anonymousButton.setOnClickListener(anonymousButtonClickListener);
+
+        new EndpointsAsyncTask().execute(new Pair<Context, Integer>(this, getDbVersionFromSharedPreferences()));
     }
 
     // Private method to handle Facebook login and callback
@@ -162,12 +166,19 @@ public class LoginActivity extends Activity {
     }
 
     public void getFromSharedPreferences(){
-        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS, Context.MODE_PRIVATE);
         User.email = sharedPreferences.getString(ExtraNames.USER_EMAIL_PREFS,"");
         User.name = sharedPreferences.getString(ExtraNames.USER_NAME_PREFS,"");
         User.id = sharedPreferences.getString(ExtraNames.USER_ID_PREFS,"");
         User.pictureUrl= sharedPreferences.getString(ExtraNames.USER_PICTURE_PREFS,"");
     }
+
+    public int getDbVersionFromSharedPreferences(){
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS,Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(ExtraNames.DB_VERSION_PREFS, 0);
+    }
+
+
 
 
 
@@ -178,4 +189,7 @@ public class LoginActivity extends Activity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+    public QuizDAO getQuizDAO() {
+        return quizDAO;
+    }
 }
