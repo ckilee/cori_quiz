@@ -31,7 +31,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, Integer>, Void, 
     @Override
     protected String doInBackground(Pair<Context, Integer>... params) {
         if(myApiService == null) {  // Only do this once
-            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+            /*MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     // options for running against local devappserver
                     // - 10.0.2.2 is localhost's IP address in Android emulator
@@ -42,8 +42,10 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, Integer>, Void, 
                         public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
                             abstractGoogleClientRequest.setDisableGZipContent(true);
                         }
-                    });
+                    });*/
             // end options for devappserver
+            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                    .setRootUrl("https://corinthians-quiz-game.appspot.com/_ah/api/");
 
             myApiService = builder.build();
         }
