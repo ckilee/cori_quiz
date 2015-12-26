@@ -42,8 +42,19 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
         if(chatMessage.getType() == Message.TYPE_MESSAGE) {
 
-            holder.tvName.setText(chatMessage.getUsername() + ":  " +
-                    chatMessage.getMessage());
+            String textToBeDisplayed = chatMessage.getUsername() + ":  " +chatMessage.getMessage();
+            holder.tvName.setText(textToBeDisplayed);
+            int textLength = textToBeDisplayed.length();
+            //36 is the number of characteres per line
+            int numberOfLines = textLength/36+2;
+
+            ViewGroup.LayoutParams params = holder.tvName.getLayoutParams();
+            final float scale = context.getResources().getDisplayMetrics().density;
+            int pixels = (int) (20 * scale + 0.5f);
+            //number of pixels needed to fit all message text
+            pixels = pixels * numberOfLines;
+            params.height = pixels;
+            holder.tvName.setLayoutParams(params);
         } else {
             holder.tvName.setText(chatMessage.getMessage());
         }
