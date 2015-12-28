@@ -26,22 +26,5 @@
         android:layout_above="@+id/buttonLoginAnonymous"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView4"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/applabel" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView5"
-        android:layout_below="@+id/imageView4"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/cori_logo"
-        android:layout_above="@+id/login_button" />
-
 
 </RelativeLayout>
