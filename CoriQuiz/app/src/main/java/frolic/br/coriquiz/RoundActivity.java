@@ -67,7 +67,7 @@ public class RoundActivity extends AppCompatActivity {
     }
 
     private void configureViews(){
-        questionTV.setText(question.getQuestion());
+        questionTV.setText(question.getQuestion().toUpperCase());
         answer1.setText(question.getAnswer1());
         answer2.setText(question.getAnswer2());
         answer3.setText(question.getAnswer3());

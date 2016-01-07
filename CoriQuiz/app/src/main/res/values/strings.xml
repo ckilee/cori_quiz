@@ -44,6 +44,7 @@
     <string name="app_acess_token">876336285821169|ScJeTM2IuYDPlfp2fmJbZnPpx-A</string>
     <string name="message_welcome">Bem vindo ao chat do Corinthians</string>
     <string name="connection_error">Erro ao conectar com o servidor!</string>
+    <string name="wrong_answer">Resposta Errada!</string>
     <string name="message_user_joined">%s entrou</string>
     <string name="message_user_left">%s saiu</string>
     <string name="user_action_typing">está digitando</string>

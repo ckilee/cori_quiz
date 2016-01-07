@@ -8,7 +8,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_round" tools:context="frolic.br.coriquiz.RoundActivity"
-    android:background="@drawable/itaquera_background">
+    android:background="@drawable/backgroundmain_round">
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -19,8 +19,7 @@
         android:layout_toEndOf="@+id/textViewCheeringButton"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        card_view:cardCornerRadius="4dp"
-        >
+        card_view:cardCornerRadius="4dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="100dp"
@@ -28,7 +27,9 @@
         android:id="@+id/text_view_question"
         android:textSize="18dp"
         android:background="@drawable/shape"
-         />
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textStyle="bold" />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -54,31 +55,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/rbQuestion1" />
+            android:id="@+id/rbQuestion1"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/rbQuestion2" />
+            android:id="@+id/rbQuestion2"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/rbQuestion3" />
+            android:id="@+id/rbQuestion3"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/rbQuestion4" />
+            android:id="@+id/rbQuestion4"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New RadioButton"
-            android:id="@+id/rbQuestion5" />
+            android:id="@+id/rbQuestion5"
+            android:textColor="#000000"
+            android:textStyle="bold" />
     </RadioGroup>
     </android.support.v7.widget.CardView>
     <TextView
@@ -141,7 +152,9 @@
         android:layout_alignEnd="@+id/card_view_radio_answers"
         android:background="@drawable/shape"
         android:elevation="5dp"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:textColor="#000000"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"

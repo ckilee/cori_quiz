@@ -114,6 +114,7 @@ public class Main2Activity extends AppCompatActivity
         setGameLevel();
 
         this.setTitle(R.string.choose_round);
+
     }
 
     private void setGameLevel() {

@@ -73,6 +73,8 @@ public class FailActivity extends AppCompatActivity {
 
         requestScore();
 
+        this.setTitle(R.string.wrong_answer);
+
     }
 
     private void requestScore(){
