@@ -35,7 +35,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView5"
         xmlns:card_view="http://schemas.android.com/apk/res-auto">
-    <fragment android:name="frolic.br.coriquiz.fragment.RankingFragment"
+
+    <FrameLayout android:name="frolic.br.coriquiz.fragment.RankingFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
@@ -57,8 +58,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/publish_score"
+        android:elevation="5dp"
         android:id="@+id/buttonPublishScore"
         android:layout_below="@+id/cardViewFailMessage"
         android:layout_alignParentStart="true"
         android:background="@android:drawable/dialog_holo_light_frame" />
+
 </RelativeLayout>

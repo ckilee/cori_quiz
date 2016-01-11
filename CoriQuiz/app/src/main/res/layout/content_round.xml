@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/radioGroupAnswers"
-        android:layout_toEndOf="@+id/textViewCheeringButton"
+        android:layout_toEndOf="@+id/textViewRoundNumber"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         card_view:cardCornerRadius="4dp">
@@ -98,7 +98,8 @@
         android:text="@string/help"
         android:id="@+id/textView3"
         android:layout_above="@+id/buttonCheering"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#fffee8" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -106,8 +107,12 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/cheering"
         android:id="@+id/textViewCheeringButton"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="@+id/buttonCheering" />
+        android:layout_alignLeft="@+id/buttonCheering"
+        android:layout_alignRight="@+id/buttonCheering"
+        android:layout_alignParentStart="@+id/buttonCheering"
+        android:textColor="#fffee8" />
 
     <Button
         android:layout_width="wrap_content"
@@ -123,8 +128,11 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/coach"
         android:id="@+id/textViewCoachButton"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignLeft="@+id/buttonCoach"
+        android:layout_alignRight="@+id/buttonCoach"
+        android:textColor="#fffee8" />
 
     <Button
         android:layout_width="wrap_content"
@@ -161,7 +169,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/textViewRoundNumber"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#fffee8" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -169,7 +178,8 @@
         android:text="@string/score"
         android:id="@+id/textView4"
         android:layout_below="@+id/card_view_radio_answers"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#fffee8" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -177,7 +187,8 @@
         android:text="0"
         android:id="@+id/textViewScore"
         android:layout_below="@+id/card_view_radio_answers"
-        android:layout_toEndOf="@+id/textView4" />
+        android:layout_toEndOf="@+id/textView4"
+        android:textColor="#fffee8" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -185,8 +196,11 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/escape"
         android:id="@+id/textViewEscapeButton"
+        android:textColor="#fffee8"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignLeft="@+id/buttonEscape"
+        android:layout_alignRight="@+id/buttonEscape"/>
 
 
 </RelativeLayout>

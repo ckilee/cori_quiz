@@ -68,17 +68,17 @@ public class RoundActivity extends AppCompatActivity {
 
     private void configureViews(){
         questionTV.setText(question.getQuestion().toUpperCase());
-        answer1.setText(question.getAnswer1());
-        answer2.setText(question.getAnswer2());
-        answer3.setText(question.getAnswer3());
-        answer4.setText(question.getAnswer4());
-        answer5.setText(question.getAnswer5());
+        answer1.setText(question.getAnswer1().toUpperCase());
+        answer2.setText(question.getAnswer2().toUpperCase());
+        answer3.setText(question.getAnswer3().toUpperCase());
+        answer4.setText(question.getAnswer4().toUpperCase());
+        answer5.setText(question.getAnswer5().toUpperCase());
         rightAnswer = question.getRightAnwser();
         Intent intent = this.getIntent();
         roundNum = intent.getIntExtra(ExtraNames.ROUND, 1);
         scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
         helpStatus = intent.getIntExtra(ExtraNames.HELP_STATUS, 0);
-        String round = roundNum+"/"+MAX_ROUND_NUM;
+        String round = roundNum+"/"+MAX_ROUND_NUM+" ";
         roundNuberTV.setText(round);
 
         disableHelp(helpStatus);
