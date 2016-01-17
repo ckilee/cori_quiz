@@ -17,7 +17,7 @@
     <string name="fail_message" formatted="false">Infelizmente voce errou a pergunta, sua pontuação total foi de: %score%. Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
     <string name="using_cheering_help">A torcida te ajudou removendo randomicamente uma pergunta. Ooh!! Todo poderoso Timão!!</string>
     <string name="using_coach_help">O técnico te ajudou removendo randomicamente duas perguntas. É nóis curinthians!</string>
-    <string name="using_escape_help">Você fugiu do BO junto com nóis! Bora para a próxima pergunta!</string>
+    <string name="using_escape_help">Você fugiu do BO! Bora para a próxima pergunta!</string>
     <string name="must_be_loged_to_display_ranking">Você precisa estar logado no facebook para mostrar o ranking com os melhores escores seu e de seus amigos</string>
     <string name="must_be_loged_to_enter_in_chat">Você precisa estar logado no facebook para poder participar do chat</string>
     <string name="share_hit_question_in_between_round" formatted="false"> é louco pelo Corinthians!!! =D Já conquistou %pontos% pontos no Quiz e acertou a pergunta: %question% Responda o Quiz e mostre para o mundo todo que você é um torcedor louco pelo Corinthians</string>
@@ -45,6 +45,8 @@
     <string name="message_welcome">Bem vindo ao chat do Corinthians</string>
     <string name="connection_error">Erro ao conectar com o servidor!</string>
     <string name="wrong_answer">Quase! Resposta Errada!</string>
+    <string name="right_answer_title">Acertou a resposta!</string>
+    <string name="escape_title">Escapou!</string>
     <string name="message_user_joined">%s entrou</string>
     <string name="message_user_left">%s saiu</string>
     <string name="user_action_typing">está digitando</string>

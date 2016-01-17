@@ -48,6 +48,12 @@ public class BetweenRoundActivity extends AppCompatActivity {
         nextRoundButton = (Button)findViewById(R.id.buttonNext);
         imageViewBetweenRound = (ImageView)findViewById(R.id.imageViewBetweenRound);
         configureViews();
+
+        if(gotRightAnswer){
+            this.setTitle(R.string.right_answer_title);
+        }else{
+            this.setTitle(R.string.escape_title);
+        }
     }
 
     private void configureViews(){
@@ -61,6 +67,7 @@ public class BetweenRoundActivity extends AppCompatActivity {
         String message = this.getString(R.string.between_round_right_message);
 
         if(fromEscape){
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageViewBetweenRound.setBackground(getDrawable(R.drawable.escape));
             }
