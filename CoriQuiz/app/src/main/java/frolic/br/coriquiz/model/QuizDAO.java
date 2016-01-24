@@ -91,6 +91,36 @@ public class QuizDAO extends QuizDBHelper {
         this.addQuestion(q9);
         Question q10=new Question("Qual foi o placar da partida em que o São Paulo venceu o Corinthians na Libertadores 2015?","2 a 0","3 a 0","3 a 2","1 a 0", "2 a 1", 1);
         this.addQuestion(q10);
+        Question q11 = new Question("Quais são as cores contidas no símbolo do Corinthians?", "Preto e branco", "Preto e vermelho", "Preto, branco e vermelho", "Preto e Roxo", "Branco, roxo e vermelho",3);
+        this.addQuestion(q11);
+        Question q12 = new Question("Qual o nome do jogador chinês que integrou a equipe do corinthians em 2012 e 2013", "Quon", "Zizao", "Li", "Chun", "Chang",2);
+        this.addQuestion(q12);
+        Question q13 = new Question("Qual é o ano de fundação do Corinthians?", "1915", "1925", "1910", "1829", "1930",3);
+        this.addQuestion(q13);
+        Question q14 = new Question("Qual desses jogadores nunca jogou pelo Corinthians?", "Luis Fabiano", "Alexandre Pato", "Roberto Rivelino", "Vampeta", "Emerson Sheik",1);
+        this.addQuestion(q14);
+        Question q15 = new Question("Marcelinho Carioca recebeu uma placa de pelé fazendo um belo gol em cima de qual goleiro?", "Rogério Ceni no São Paulo", "Marcos no Palmeira", "Edinho no Santos", "Zetti no São Paulo", "Bruno no Flamengo",3);
+        this.addQuestion(q15);
+        Question q16 = new Question("O Corinthians conquistou a primeira copa libetadores jogando contra qual time na final?", "Cruz Azul", "Santos", "São Paulo", "RiverPlate", "Boca Juniors",5);
+        this.addQuestion(q16);
+        Question q17 = new Question("Em 2012 o Corinthians conquistou o mundial de clubes jogando contra qual time na final?", "Liverpool", "Real Madri", "Vasco da Gama", "Chelsea", "Barcelona",4);
+        this.addQuestion(q17);
+        Question q18 = new Question("Em 2000 o Corinthians conquistou o mundial de clubes da Fifa jogando contra qual time na final?", "Vasco da Gama", "Real Madri", "São Paulo", "Flamengo", "Fluminense",1);
+        this.addQuestion(q18);
+        Question q19 = new Question("Como ficou conhecido o período em que os jogadores corinthianos tinham papel ativo nas decisões do clube, onde tudo era resolvido pelo voto?", "Democracia Corinthiana", "República Corinthiana", "Anarquia Corinthiana", "Socialismo Corinthiano", "Capitalismo Corinthiano",1);
+        this.addQuestion(q19);
+        Question q20 = new Question("Quem é o maior artilheir do corinthians com 305 gols?", "Ronaldo", "Marcelinho Carioca", "Sócrates", "Rivelino", "Cláudio",5);
+        this.addQuestion(q20);
+        Question q21 = new Question("Qual desses jogadores estrangeiros não jogou no corinthians?", "Gamarra", "Calitos Tevez", "Mascherano", "Guerrero", "Herrera",3);
+        this.addQuestion(q21);
+        Question q22 = new Question("Qual é o mascote do Corinthians?", "Gambá", "Mosqueteiro", "Cachorro", "São Jorge", "Gavião",2);
+        this.addQuestion(q22);
+        Question q23 = new Question("Como é apelidado o atual estádio do Corinthians?", "Monumental", "Bombonera", "Caldeirão", "Itaquerão", "Mosquetão",4);
+        this.addQuestion(q23);
+        Question q24 = new Question("Qual desses goleiros nunca jogou pelo Corinthians?", "Dida", "Julio Cesar", "Ronaldo", "Cássio", "Felipe",2);
+        this.addQuestion(q24);
+        Question q25 = new Question("Qual foi o período em que o Timão viveu o maior jejum de sua história?", "De 1945 até 1966", "De 1986 até 2009", "De 1977 até 2000", "De 1955 até 1976", "De 1945 até 1979",4);
+        this.addQuestion(q25);
     }
 
     public void addQuestions(List<Question> questionList){
