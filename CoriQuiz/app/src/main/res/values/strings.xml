@@ -68,4 +68,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9505366133372164/5183539934</string>
+    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-9505366133372164/6660273134</string>
 </resources>

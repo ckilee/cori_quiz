@@ -34,6 +34,8 @@ import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +53,8 @@ import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.ExtraNames;
 import frolic.br.coriquiz.model.EndpointsAsyncTask;
 
+
+
 public class LoginActivity extends Activity {
     private CallbackManager callbackManager;
     private Button anonymousButton;
@@ -61,8 +65,8 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
-
         setContentView(R.layout.activity_login);
+        loadAdware();
         User.name = this.getString(R.string.anonymous_name);
         quizDAO = new QuizDAO(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
@@ -92,6 +96,20 @@ public class LoginActivity extends Activity {
         anonymousButton.setOnClickListener(anonymousButtonClickListener);
 
         new EndpointsAsyncTask().execute(new Pair<Context, Integer>(this, getDbVersionFromSharedPreferences()));
+    }
+
+    private void loadAdware() {
+        //Adware Login Activity
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("E112885C2D32D31690C7B60F25C89356")
+                .addTestDevice("13E7A5DDF2981F979D554ED02BC571B3")
+                .addTestDevice("6B95C2235F71E07117E929AE067BED28")
+                .build();
+        mAdView.loadAd(adRequest);
     }
 
     // Private method to handle Facebook login and callback
@@ -130,6 +148,7 @@ public class LoginActivity extends Activity {
                                 }
                                 addToSharedPreferences(User.name, User.email, User.id, User.pictureUrl);
                                 //quizDAO.addUserIfNotExist();
+
                                 Log.i("LoginActivity", "onSucess");
                                 Intent i = new Intent(LoginActivity.this, Main2Activity.class);
                                 startActivity(i);
@@ -140,7 +159,11 @@ public class LoginActivity extends Activity {
 
                         GraphRequestAsyncTask requestAssyncTask = new GraphRequestAsyncTask(request);
                         requestAssyncTask.execute();
-
+                        /*
+                        Log.i("LoginActivity", "onSucess");
+                        Intent i = new Intent(LoginActivity.this, Main2Activity.class);
+                        startActivity(i);
+                        //finish();*/
                     }
 
                     @Override
