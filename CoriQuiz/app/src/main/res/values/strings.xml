@@ -10,6 +10,7 @@
     <string name="escape">Fuga</string>
     <string name="answer">Responder</string>
     <string name="next_round">Proxima Rodada</string>
+    <string name="next_question">Proxima Pergunta</string>
     <string name="publish_score">Publicar Score</string>
     <string name="score">Score:</string>
     <string name="between_round_right_message" formatted="false">Parabens, você respondeu corretamente a pergunta: %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir o game =D</string>

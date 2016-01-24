@@ -28,7 +28,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next_round"
+        android:text="@string/next_question"
         android:id="@+id/buttonNext"
         android:layout_below="@+id/cardViewTextViewMessage"
         android:layout_alignParentStart="true"
