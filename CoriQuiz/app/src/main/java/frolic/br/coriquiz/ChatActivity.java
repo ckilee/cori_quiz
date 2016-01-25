@@ -63,7 +63,7 @@ public class ChatActivity extends AppCompatActivity implements ActivityGenericsI
         setContentView(R.layout.activity_chat);
 
         loadAdware();
-        
+
         //Get values coming from MainActivity
         getIntentValues();
 

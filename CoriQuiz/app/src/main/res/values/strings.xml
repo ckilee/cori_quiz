@@ -13,7 +13,7 @@
     <string name="next_question">Proxima Pergunta</string>
     <string name="publish_score">Publicar Score</string>
     <string name="score">Score:</string>
-    <string name="between_round_right_message" formatted="false">Parabens, você respondeu corretamente a pergunta: %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir o game =D</string>
+    <string name="between_round_right_message" formatted="false">Parabens, você respondeu corretamente a pergunta: %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir a rodada =D</string>
     <string name="win_message" formatted="false">Parabéns, você terminou a rodada do Quiz! com a pontuação: %score%! Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
     <string name="fail_message" formatted="false">Infelizmente voce errou a pergunta, sua pontuação total foi de: %score%. Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
     <string name="using_cheering_help">A torcida te ajudou removendo randomicamente uma pergunta. Ooh!! Todo poderoso Timão!!</string>

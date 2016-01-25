@@ -20,6 +20,7 @@ import com.google.android.gms.ads.AdView;
 import frolic.br.coriquiz.model.Question;
 import frolic.br.coriquiz.model.QuizDAO;
 import frolic.br.coriquiz.model.User;
+import frolic.br.coriquiz.utils.Constants;
 import frolic.br.coriquiz.utils.ExtraNames;
 import frolic.br.coriquiz.utils.Utils;
 
@@ -41,7 +42,6 @@ public class RoundActivity extends AppCompatActivity {
     private int helpStatus = 0;
     private int rightAnswer = 0;
     private int roundNum = 1;
-    private final int MAX_ROUND_NUM = 5;
     private int scoreNum = 0;
     private boolean gotRightAnswer = false;
 
@@ -96,7 +96,7 @@ public class RoundActivity extends AppCompatActivity {
         roundNum = intent.getIntExtra(ExtraNames.ROUND, 1);
         scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
         helpStatus = intent.getIntExtra(ExtraNames.HELP_STATUS, 0);
-        String round = roundNum+"/"+MAX_ROUND_NUM+" ";
+        String round = roundNum+"/"+ Constants.MAX_ROUND_NUM+" ";
         roundNuberTV.setText(round);
 
         disableHelp(helpStatus);
@@ -242,7 +242,7 @@ public class RoundActivity extends AppCompatActivity {
     }
 
     private void proceedToNewActivityFromEscape(){
-        if( roundNum !=MAX_ROUND_NUM) {
+        if( roundNum != Constants.MAX_ROUND_NUM) {
             Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
             intent.putExtra(ExtraNames.ROUND, roundNum);
             intent.putExtra(ExtraNames.SCORE, scoreNum);
@@ -261,7 +261,7 @@ public class RoundActivity extends AppCompatActivity {
     }
 
     private void proceedToNewActivity(){
-        if( roundNum !=MAX_ROUND_NUM) {
+        if( roundNum != Constants.MAX_ROUND_NUM) {
             Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
             intent.putExtra(ExtraNames.ROUND, roundNum);
             intent.putExtra(ExtraNames.SCORE, scoreNum);

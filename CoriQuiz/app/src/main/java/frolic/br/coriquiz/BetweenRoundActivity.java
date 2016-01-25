@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import frolic.br.coriquiz.model.User;
+import frolic.br.coriquiz.utils.Constants;
 import frolic.br.coriquiz.utils.ExtraNames;
 
 public class BetweenRoundActivity extends AppCompatActivity {
@@ -75,7 +76,7 @@ public class BetweenRoundActivity extends AppCompatActivity {
         }
 
         message = message.replace("%round%",Integer.toString(roundNum));
-        message = message.replace("%missing%",Integer.toString(10 - roundNum));
+        message = message.replace("%missing%",Integer.toString(Constants.MAX_ROUND_NUM - roundNum));
         message = message.replace("%score%",Integer.toString(scoreNum));
         messageTextView.setText(message);
 
