@@ -30,6 +30,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -70,6 +72,7 @@ public class Main2Activity extends AppCompatActivity
 
     private void initializing(){
         setContentView(R.layout.activity_main2);
+        loadAdware();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -115,6 +118,20 @@ public class Main2Activity extends AppCompatActivity
 
         this.setTitle(R.string.choose_round);
 
+    }
+
+    private void loadAdware() {
+        //Adware Login Activity
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("E112885C2D32D31690C7B60F25C89356")
+                .addTestDevice("13E7A5DDF2981F979D554ED02BC571B3")
+                .addTestDevice("6B95C2235F71E07117E929AE067BED28")
+                .build();
+        mAdView.loadAd(adRequest);
     }
 
     private void setGameLevel() {

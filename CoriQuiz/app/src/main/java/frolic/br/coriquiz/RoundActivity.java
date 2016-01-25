@@ -14,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import frolic.br.coriquiz.model.Question;
 import frolic.br.coriquiz.model.QuizDAO;
 import frolic.br.coriquiz.model.User;
@@ -46,6 +49,7 @@ public class RoundActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round);
+        loadAdware();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         questionTV = (TextView) findViewById(R.id.text_view_question);
@@ -64,6 +68,20 @@ public class RoundActivity extends AppCompatActivity {
         question = quizDAO.getRandonQuestion();
         configureViews();
 
+    }
+
+    private void loadAdware() {
+        //Adware Login Activity
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("E112885C2D32D31690C7B60F25C89356")
+                .addTestDevice("13E7A5DDF2981F979D554ED02BC571B3")
+                .addTestDevice("6B95C2235F71E07117E929AE067BED28")
+                .build();
+        mAdView.loadAd(adRequest);
     }
 
     private void configureViews(){
