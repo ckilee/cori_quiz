@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,6 +62,8 @@ public class ChatActivity extends AppCompatActivity implements ActivityGenericsI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        loadAdware();
+        
         //Get values coming from MainActivity
         getIntentValues();
 
@@ -86,6 +90,20 @@ public class ChatActivity extends AppCompatActivity implements ActivityGenericsI
         }
 
         attemptLogin();
+    }
+
+    private void loadAdware() {
+        //Adware Login Activity
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("E112885C2D32D31690C7B60F25C89356")
+                .addTestDevice("13E7A5DDF2981F979D554ED02BC571B3")
+                .addTestDevice("6B95C2235F71E07117E929AE067BED28")
+                .build();
+        mAdView.loadAd(adRequest);
     }
 
     private void attemptLogin() {
