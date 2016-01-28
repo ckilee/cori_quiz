@@ -30,8 +30,10 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -61,6 +63,17 @@ public class Main2Activity extends AppCompatActivity
     private final static int CHAT_CONNECTION_ERROR = 1;
     private int curScore = 0;
     private int curLevel = 0;
+    private InterstitialAd mInterstitialAd;
+    private static Main2Activity Instance;
+
+    public Main2Activity(){
+        super();
+        Instance = this;
+    }
+
+    public static Main2Activity getInstance(){
+        return Instance;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +145,41 @@ public class Main2Activity extends AppCompatActivity
                 .addTestDevice("6B95C2235F71E07117E929AE067BED28")
                 .build();
         mAdView.loadAd(adRequest);
+
+        loadInterstitial();
+    }
+
+    private void loadInterstitial(){
+        //Adware interstitial ads
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(this.getString(R.string.interstitial_ad_unit_id));
+        AdRequest adRequestInterstitialAd = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("E112885C2D32D31690C7B60F25C89356")
+                .addTestDevice("13E7A5DDF2981F979D554ED02BC571B3")
+                .addTestDevice("6B95C2235F71E07117E929AE067BED28")
+                .build();
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+
+            }
+        });
+
+        //AdRequest adRequestInterstitialAd = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequestInterstitialAd);
+    }
+
+    private void requestNewInterstitial(){
+        AdRequest adRequestInterstitialAd = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("E112885C2D32D31690C7B60F25C89356")
+                .addTestDevice("13E7A5DDF2981F979D554ED02BC571B3")
+                .addTestDevice("6B95C2235F71E07117E929AE067BED28")
+                .build();
+        mInterstitialAd.loadAd(adRequestInterstitialAd);
     }
 
     private void setGameLevel() {
@@ -369,5 +417,9 @@ public class Main2Activity extends AppCompatActivity
     public int getLevelSharedPreferences(){
         SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(ExtraNames.USER_LEVEL_PREFS,0);
+    }
+
+    public InterstitialAd getInterstitialAd(){
+        return mInterstitialAd;
     }
 }
