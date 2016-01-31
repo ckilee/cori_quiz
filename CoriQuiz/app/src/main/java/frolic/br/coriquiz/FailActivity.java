@@ -52,7 +52,10 @@ public class FailActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
     private int score = 0;
     private Button publishScoreButton;
+    private Button backButton;
     private InterstitialAd mInterstitialAd;
+    private boolean hasLoadedRanking = false;
+    Fragment rankingFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +66,23 @@ public class FailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        configureViews();
+
+        if(!hasLoadedRanking)
+            requestScore();
+
+        this.setTitle(R.string.wrong_answer);
+
+        new ShowInterstitialTask().execute(500);
+
+    }
+
+    private void configureViews(){
         Intent i = getIntent();
         score = i.getIntExtra(ExtraNames.SCORE,0);
         failTextView = (TextView)findViewById(R.id.textViewFailMessage);
         failTextView.setText(getText(R.string.fail_message).toString().replace("%score%", Integer.toString(score)));
+
         publishScoreButton  = (Button)this.findViewById(R.id.buttonPublishScore);
         //Publish Score Button
         View.OnClickListener publishListener = new View.OnClickListener() {
@@ -80,12 +96,14 @@ public class FailActivity extends AppCompatActivity {
             publishScoreButton.setEnabled(false);
         }
 
-        requestScore();
-
-        this.setTitle(R.string.wrong_answer);
-
-        new ShowInterstitialTask().execute(500);
-
+        backButton = (Button)this.findViewById(R.id.buttonBackToMain);
+        View.OnClickListener backListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                finish();
+            }
+        };
+        backButton.setOnClickListener(backListener);
     }
 
     private class ShowInterstitialTask extends AsyncTask<Integer,Void,Void> {
@@ -132,39 +150,59 @@ public class FailActivity extends AppCompatActivity {
     }
 
     private void requestScore(){
-        if(AccessToken.getCurrentAccessToken() != null) {
-            GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
-                @Override
-                public void onCompleted(GraphResponse response) {
-                    //response.getRawResponse());
+        try {
+            if (AccessToken.getCurrentAccessToken() != null) {
+                GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                        //response.getRawResponse());
 
-                    JSONArray jarray;
-                    JSONObject jobject = response.getJSONObject();
-                    jarray = jobject.optJSONArray("data");
-                    ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
-                    for (int i = 0; i < jarray.length(); i++) {
-                        JSONObject scoreObject = null;
-                        JSONObject userObject = null;
-                        try {
-                            scoreObject = jarray.getJSONObject(i);
-                            userObject = scoreObject.getJSONObject("user");
-                            RankingItem rankingItem = new RankingItem(userObject.getString("name"), scoreObject.getString("score"));
-                            rankingItemList.add(rankingItem);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        JSONArray jarray;
+                        JSONObject jobject = response.getJSONObject();
+                        jarray = jobject.optJSONArray("data");
+                        ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
+                        for (int i = 0; i < jarray.length(); i++) {
+                            JSONObject scoreObject = null;
+                            JSONObject userObject = null;
+                            try {
+                                scoreObject = jarray.getJSONObject(i);
+                                userObject = scoreObject.getJSONObject("user");
+                                RankingItem rankingItem = new RankingItem(userObject.getString("name"), scoreObject.getString("score"));
+                                rankingItemList.add(rankingItem);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            //get your values
+
                         }
-                        //get your values
 
+                        rankingFragment = RankingFragment.newInstance(rankingItemList);
+                        getFragmentManager().beginTransaction().replace(R.id.rankingFragment, rankingFragment).commit();
+                        hasLoadedRanking = true;
                     }
 
-                    RankingFragment rankingFragment = RankingFragment.newInstance(rankingItemList);
-                    getFragmentManager().beginTransaction().replace(R.id.rankingFragment, rankingFragment).commit();
-                }
+                }).executeAsync();
+            } else {
+                rankingFragment = RankingNotLogedFragment.newInstance();
+                getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingFragment).commit();
+                hasLoadedRanking = true;
+            }
+        }catch(IllegalStateException ie){
+            ie.printStackTrace();
+            hasLoadedRanking = false;
+        }
+    }
 
-            }).executeAsync();
-        }else{
-            RankingNotLogedFragment rankingNotLogedFragment = RankingNotLogedFragment.newInstance();
-            getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingNotLogedFragment).commit();
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if(!hasLoadedRanking){
+            if(rankingFragment==null){
+                requestScore();
+            }else{
+                getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingFragment).commit();
+                hasLoadedRanking = true;
+            }
         }
     }
 

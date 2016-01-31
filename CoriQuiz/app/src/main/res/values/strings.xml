@@ -55,6 +55,7 @@
     <string name="reset_score">Limpar Score</string>
     <string name="score_has_been_reset">O Score atual foi limpo</string>
 
+    <string name="back_to_main">Menu Principal</string>
     <plurals name="message_participants">
         <item quantity="one">Há %d participante</item>
         <item quantity="other">Há %d participantes</item>

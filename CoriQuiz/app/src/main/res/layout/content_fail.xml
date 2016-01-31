@@ -62,6 +62,25 @@
         android:id="@+id/buttonPublishScore"
         android:layout_below="@+id/cardViewFailMessage"
         android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/auxLayoutCenter"
         android:background="@android:drawable/dialog_holo_light_frame" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back_to_main"
+        android:elevation="5dp"
+        android:id="@+id/buttonBackToMain"
+        android:layout_below="@+id/cardViewFailMessage"
+        android:layout_alignParentRight="true"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:layout_toRightOf="@+id/auxLayoutCenter" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:id="@+id/auxLayoutCenter"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
