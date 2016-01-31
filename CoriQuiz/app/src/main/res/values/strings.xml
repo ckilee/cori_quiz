@@ -22,6 +22,7 @@
     <string name="must_be_loged_to_display_ranking">Você precisa estar logado no facebook para mostrar o ranking com os melhores escores seu e de seus amigos</string>
     <string name="must_be_loged_to_enter_in_chat">Você precisa estar logado no facebook para poder participar do chat</string>
     <string name="share_hit_question_in_between_round" formatted="false"> é louco pelo Corinthians!!! =D Já conquistou %pontos% pontos no Quiz e acertou a pergunta: %question% Responda o Quiz e mostre para o mundo todo que você é um torcedor louco pelo Corinthians</string>
+    <string name="share_scape_question_in_between_round" formatted="false"> é louco pelo Corinthians!!! =D Já conquistou %pontos% pontos, mas teve que escapar da seguinte pergunta: %question% Responda o Quiz e mostre para o mundo todo que você é um torcedor louco pelo Corinthians</string>
     <string name="have_shared">Você compartilhou um post via facebook</string>
     <string name="have_logged_out">Logout efetuado</string>
     <string name="action_settings">Settings</string>

@@ -111,9 +111,15 @@ public class BetweenRoundActivity extends AppCompatActivity {
     private void publishShare(){
         JSONObject jsonObject = new JSONObject();
         try {
+            int messageId = 0;
+            if(fromEscape){
+                messageId = R.string.share_scape_question_in_between_round;
+            }else{
+                messageId = R.string.share_hit_question_in_between_round;
+            }
             jsonObject.put("name", "Acertou a resposta no Corinthians Quiz Game!");
             jsonObject.put("caption", "Corinthians Quiz Game");
-            jsonObject.put("description", User.name+ this.getString(R.string.share_hit_question_in_between_round).replace("%question%",curQuestion).replace("%pontos%",Integer.toString(scoreNum)));
+            jsonObject.put("description", User.name+ this.getString(messageId).replace("%question%",curQuestion).replace("%pontos%",Integer.toString(scoreNum)));
             jsonObject.put("link", "https://play.google.com/store/apps/details?id=frolic.br.coriquiz");
             jsonObject.put("picture", "http://ckilee.esy.es/uploads/CorinthiansQuizGame.png");
         } catch (JSONException e) {
@@ -122,9 +128,13 @@ public class BetweenRoundActivity extends AppCompatActivity {
         GraphRequestAsyncTask request = GraphRequest.newPostRequest(AccessToken.getCurrentAccessToken(), "/" + User.id + "/feed", jsonObject, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
-                Log.i("BetweenRoundActivity",response.getRawResponse());
+                String rawResponse = "";
+                if(response.getRawResponse()!=null){
+                    rawResponse = response.getRawResponse();
+                }
+                Log.i("BetweenRoundActivity", rawResponse);
                 shareButton.setEnabled(false);
-                Toast.makeText(getApplicationContext(),R.string.have_shared,Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.have_shared, Toast.LENGTH_LONG).show();
             }
 
         }).executeAsync();
