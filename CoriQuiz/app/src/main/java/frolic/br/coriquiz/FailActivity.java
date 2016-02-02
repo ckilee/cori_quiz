@@ -23,6 +23,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.internal.Utility;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -266,8 +267,9 @@ public class FailActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        publishScore();
+        if(CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()==requestCode) {
+            publishScore();
+        }
     }
 
 }

@@ -62,7 +62,7 @@ public class LoginActivity extends Activity {
         }
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
+        loginButton.setReadPermissions(Arrays.asList("public_profile"));
         onFbLogin();
 
         //Anonymous login Button

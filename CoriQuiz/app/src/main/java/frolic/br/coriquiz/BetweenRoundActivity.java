@@ -18,9 +18,15 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
+import com.facebook.internal.CallbackManagerImpl;
+import com.facebook.login.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.Constants;
@@ -98,7 +104,7 @@ public class BetweenRoundActivity extends AppCompatActivity {
         View.OnClickListener shareListener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                publishShare();
+                granteePublishActionsPermission();
             }
         };
         shareButton.setOnClickListener(shareListener);
@@ -139,6 +145,33 @@ public class BetweenRoundActivity extends AppCompatActivity {
 
         }).executeAsync();
 
+    }
+
+    private void granteePublishActionsPermission(){
+        Set<String> permissions = AccessToken.getCurrentAccessToken()
+                .getPermissions();
+
+        final List<String> PUBLISH_PERMISSIONS = Arrays
+                .asList("publish_actions");
+        if (!permissions.containsAll(PUBLISH_PERMISSIONS)) {
+
+            // pendingPublishReauthorization = true;
+            LoginManager.getInstance().logInWithPublishPermissions(this,
+                    PUBLISH_PERMISSIONS);
+
+        }else{
+            publishShare();
+        }
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode()==requestCode) {
+            publishShare();
+        }
     }
 
 }
