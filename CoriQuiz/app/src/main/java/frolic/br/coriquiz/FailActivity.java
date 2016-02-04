@@ -157,41 +157,49 @@ public class FailActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(GraphResponse response) {
                         //response.getRawResponse());
+                        try {
+                            JSONArray jarray;
+                            JSONObject jobject = response.getJSONObject();
 
-                        JSONArray jarray;
-                        JSONObject jobject = response.getJSONObject();
-                        jarray = jobject.optJSONArray("data");
-                        ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
-                        for (int i = 0; i < jarray.length(); i++) {
-                            JSONObject scoreObject = null;
-                            JSONObject userObject = null;
-                            try {
-                                scoreObject = jarray.getJSONObject(i);
-                                userObject = scoreObject.getJSONObject("user");
-                                RankingItem rankingItem = new RankingItem(userObject.getString("name"), scoreObject.getString("score"));
-                                rankingItemList.add(rankingItem);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                            jarray = jobject.optJSONArray("data");
+                            ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
+                            for (int i = 0; i < jarray.length(); i++) {
+                                JSONObject scoreObject = null;
+                                JSONObject userObject = null;
+                                try {
+                                    scoreObject = jarray.getJSONObject(i);
+                                    userObject = scoreObject.getJSONObject("user");
+                                    RankingItem rankingItem = new RankingItem(userObject.getString("name"), scoreObject.getString("score"));
+                                    rankingItemList.add(rankingItem);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                //get your values
+
                             }
-                            //get your values
 
+                            rankingFragment = RankingFragment.newInstance(rankingItemList);
+                            getFragmentManager().beginTransaction().replace(R.id.rankingFragment, rankingFragment).commit();
+                            hasLoadedRanking = true;
+                        }catch(NullPointerException ne){
+                            loadRankingNotLogedFragment();
                         }
-
-                        rankingFragment = RankingFragment.newInstance(rankingItemList);
-                        getFragmentManager().beginTransaction().replace(R.id.rankingFragment, rankingFragment).commit();
-                        hasLoadedRanking = true;
                     }
 
                 }).executeAsync();
             } else {
-                rankingFragment = RankingNotLogedFragment.newInstance();
-                getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingFragment).commit();
-                hasLoadedRanking = true;
+                loadRankingNotLogedFragment();
             }
         }catch(IllegalStateException ie){
             ie.printStackTrace();
             hasLoadedRanking = false;
         }
+    }
+
+    private void loadRankingNotLogedFragment(){
+        rankingFragment = RankingNotLogedFragment.newInstance();
+        getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingFragment).commit();
+        hasLoadedRanking = true;
     }
 
     @Override
