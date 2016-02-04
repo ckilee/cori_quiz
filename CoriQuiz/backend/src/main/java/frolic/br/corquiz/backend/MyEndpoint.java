@@ -27,7 +27,7 @@ import javax.inject.Named;
         )
 )
 public class MyEndpoint {
-    private int serverDbVersion = 4;
+    private int serverDbVersion = 5;
     QuestionJson questionJson = new QuestionJson().setVersion(serverDbVersion);
 
     /**
@@ -91,7 +91,7 @@ public class MyEndpoint {
         questionJson.add(q19);
         Question q20 = new Question("Quem é o maior artilheir do corinthians com 305 gols?", "Ronaldo", "Marcelinho Carioca", "Sócrates", "Rivelino", "Cláudio",5);
         questionJson.add(q20);
-        Question q21 = new Question("Qual desses jogadores estrangeiros não jogou no corinthians?", "Gamarra", "Calitos Tevez", "Mascherano", "Guerrero", "Herrera",3);
+        Question q21 = new Question("Qual desses jogadores estrangeiros não jogou no corinthians?", "Gamarra", "Calitos Tevez", "Riquelme", "Guerrero", "Herrera",3);
         questionJson.add(q21);
         Question q22 = new Question("Qual é o mascote do Corinthians?", "Gambá", "Mosqueteiro", "Cachorro", "São Jorge", "Gavião",2);
         questionJson.add(q22);

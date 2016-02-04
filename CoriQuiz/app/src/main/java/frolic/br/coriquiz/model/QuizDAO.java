@@ -111,7 +111,7 @@ public class QuizDAO extends QuizDBHelper {
         this.addQuestion(q19);
         Question q20 = new Question("Quem é o maior artilheir do corinthians com 305 gols?", "Ronaldo", "Marcelinho Carioca", "Sócrates", "Rivelino", "Cláudio",5);
         this.addQuestion(q20);
-        Question q21 = new Question("Qual desses jogadores estrangeiros não jogou no corinthians?", "Gamarra", "Calitos Tevez", "Mascherano", "Guerrero", "Herrera",3);
+        Question q21 = new Question("Qual desses jogadores estrangeiros não jogou no corinthians?", "Gamarra", "Calitos Tevez", "Riquelme", "Guerrero", "Herrera",3);
         this.addQuestion(q21);
         Question q22 = new Question("Qual é o mascote do Corinthians?", "Gambá", "Mosqueteiro", "Cachorro", "São Jorge", "Gavião",2);
         this.addQuestion(q22);
