@@ -242,6 +242,17 @@ public class Main2Activity extends AppCompatActivity
             round5Button.setEnabled(true);
             round5Button.setBackgroundResource(R.drawable.rodada5);
 
+        }else if(curLevel>4){
+            round1Button.setEnabled(false);
+            round1Button.setBackgroundResource(R.drawable.rodada_completa1);
+            round2Button.setEnabled(false);
+            round2Button.setBackgroundResource(R.drawable.rodada_completa2);
+            round3Button.setEnabled(false);
+            round3Button.setBackgroundResource(R.drawable.rodada_completa3);
+            round4Button.setEnabled(false);
+            round4Button.setBackgroundResource(R.drawable.rodada_completa4);
+            round5Button.setEnabled(false);
+            round5Button.setBackgroundResource(R.drawable.rodada_completa5);
         }
     }
 
