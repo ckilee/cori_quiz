@@ -157,9 +157,9 @@ public class QuizDAO extends QuizDBHelper {
 
         db.close();
         return q;*/
-        Log.i("QuizDAO","notInString:"+notInString);
+        Log.i("QuizDAO","notInString:"+notInString.replace("'",""));
 
-        String query = "select * from "+QuizContract.QUESTION_TABLE+" where "+QuizContract.Column.ID+" not in ("+notInString+") order by random() limit 11";
+        String query = "select * from "+QuizContract.QUESTION_TABLE+" where "+QuizContract.Column.ID+" not in ("+notInString.replace("'","")+") order by random() limit 11";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
