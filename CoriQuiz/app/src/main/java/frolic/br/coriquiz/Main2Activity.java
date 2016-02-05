@@ -185,6 +185,7 @@ public class Main2Activity extends AppCompatActivity
     private void setGameLevel() {
         if(curLevel==0){
             round1Button.setEnabled(true);
+            round1Button.setBackgroundResource(R.drawable.rodada1);
             round2Button.setBackgroundResource(R.drawable.rodada_bloqueada);
             round2Button.setEnabled(false);
             round3Button.setBackgroundResource(R.drawable.rodada_bloqueada);
@@ -197,6 +198,7 @@ public class Main2Activity extends AppCompatActivity
             round1Button.setEnabled(false);
             round1Button.setBackgroundResource(R.drawable.rodada_completa1);
             round2Button.setEnabled(true);
+            round2Button.setBackgroundResource(R.drawable.rodada2);
             round3Button.setBackgroundResource(R.drawable.rodada_bloqueada);
             round3Button.setEnabled(false);
             round4Button.setBackgroundResource(R.drawable.rodada_bloqueada);
@@ -210,6 +212,7 @@ public class Main2Activity extends AppCompatActivity
             round2Button.setEnabled(false);
             round2Button.setBackgroundResource(R.drawable.rodada_completa2);
             round3Button.setEnabled(true);
+            round3Button.setBackgroundResource(R.drawable.rodada3);
             round4Button.setBackgroundResource(R.drawable.rodada_bloqueada);
             round4Button.setEnabled(false);
             round5Button.setBackgroundResource(R.drawable.rodada_bloqueada);
@@ -223,6 +226,7 @@ public class Main2Activity extends AppCompatActivity
             round3Button.setEnabled(false);
             round3Button.setBackgroundResource(R.drawable.rodada_completa3);
             round4Button.setEnabled(true);
+            round4Button.setBackgroundResource(R.drawable.rodada4);
             round5Button.setEnabled(false);
             round5Button.setBackgroundResource(R.drawable.rodada_bloqueada);
         }
@@ -236,6 +240,7 @@ public class Main2Activity extends AppCompatActivity
             round4Button.setEnabled(false);
             round4Button.setBackgroundResource(R.drawable.rodada_completa4);
             round5Button.setEnabled(true);
+            round5Button.setBackgroundResource(R.drawable.rodada5);
 
         }
     }
