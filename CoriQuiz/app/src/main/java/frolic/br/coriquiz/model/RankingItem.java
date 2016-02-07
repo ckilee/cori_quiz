@@ -7,17 +7,30 @@ import android.os.Parcelable;
  * Created by ckilee on 03/12/15.
  */
 public class RankingItem implements Parcelable{
+    public static int numberOfItems = 0;
+    private int id;
     private String name;
     private String score;
 
     public RankingItem(String name, String score) {
+        numberOfItems++;
+        this.id = numberOfItems;
         this.name = name;
         this.score = score;
     }
 
     public RankingItem(Parcel in) {
+        this.id = in.readInt();
         this.name = in.readString();
         this.score = in.readString();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -38,7 +51,7 @@ public class RankingItem implements Parcelable{
 
     @Override
     public String toString() {
-        return name+"  -  "+score;
+        return id+" - "+name+"  -  "+score;
     }
 
     @Override
@@ -48,6 +61,7 @@ public class RankingItem implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(name);
         dest.writeString(score);
     }

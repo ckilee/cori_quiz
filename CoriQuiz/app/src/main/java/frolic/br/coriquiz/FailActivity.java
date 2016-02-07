@@ -163,6 +163,7 @@ public class FailActivity extends AppCompatActivity {
 
                             jarray = jobject.optJSONArray("data");
                             ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
+                            RankingItem.numberOfItems = 0;
                             for (int i = 0; i < jarray.length(); i++) {
                                 JSONObject scoreObject = null;
                                 JSONObject userObject = null;

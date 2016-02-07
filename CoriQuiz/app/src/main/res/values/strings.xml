@@ -2,6 +2,7 @@
     <string name="app_name">Corinthians Quiz Game</string>
     <string name="new_game">Novo Jogo</string>
     <string name="ranking">Ranking</string>
+    <string name="friends_ranking">Ranking dos seus amigos</string>
     <string name="share">Compartilhar</string>
     <string name="question">Pergunta:</string>
     <string name="help">Ajuda:</string>
@@ -24,6 +25,7 @@
     <string name="share_hit_question_in_between_round" formatted="false"> é louco pelo Corinthians!!! =D Já conquistou %pontos% pontos no Quiz e acertou a pergunta: %question% Responda o Quiz e mostre para o mundo todo que você é um torcedor louco pelo Corinthians</string>
     <string name="share_scape_question_in_between_round" formatted="false"> é louco pelo Corinthians!!! =D Já conquistou %pontos% pontos, mas teve que escapar da seguinte pergunta: %question% Responda o Quiz e mostre para o mundo todo que você é um torcedor louco pelo Corinthians</string>
     <string name="have_shared">Você compartilhou um post via facebook</string>
+    <string name="failed_to_log_through_facebook">Não foi possível logar usando sua conta do facebook. Tente alguns minutos mais tarde</string>
     <string name="have_logged_out">Logout efetuado</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_round">Corinthians Quiz Game</string>

@@ -155,7 +155,9 @@ public class LoginActivity extends Activity {
 
                     @Override
                     public void onError(FacebookException error) {
+                        Toast.makeText(LoginActivity.this,R.string.failed_to_log_through_facebook,Toast.LENGTH_LONG);
                         Log.i("LoginActivity", "onError");
+                        Log.i("LoginActivity", error.getMessage());
                     }
                 });
     }

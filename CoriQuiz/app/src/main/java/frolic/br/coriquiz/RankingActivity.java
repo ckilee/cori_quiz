@@ -31,7 +31,7 @@ public class RankingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
-        this.setTitle(R.string.ranking);
+        this.setTitle(R.string.friends_ranking);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -48,6 +48,7 @@ public class RankingActivity extends AppCompatActivity {
                     JSONObject jobject = response.getJSONObject();
                     jarray = jobject.optJSONArray("data");
                     ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
+                    RankingItem.numberOfItems = 0;
                     for (int i = 0; i < jarray.length(); i++) {
                         JSONObject scoreObject = null;
                         JSONObject userObject = null;
