@@ -184,6 +184,7 @@ public class FailActivity extends AppCompatActivity {
                             getFragmentManager().beginTransaction().replace(R.id.rankingFragment, rankingFragment).commit();
                             hasLoadedRanking = true;
                         }catch(NullPointerException ne){
+                            ne.printStackTrace();
                             loadRankingNotLogedFragment();
                         }
                     }
@@ -199,9 +200,14 @@ public class FailActivity extends AppCompatActivity {
     }
 
     private void loadRankingNotLogedFragment(){
-        rankingFragment = RankingNotLogedFragment.newInstance();
-        getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingFragment).commit();
-        hasLoadedRanking = true;
+        try {
+            rankingFragment = RankingNotLogedFragment.newInstance();
+            getFragmentManager().beginTransaction().add(R.id.rankingFragment, rankingFragment).commit();
+            hasLoadedRanking = true;
+        }catch (IllegalStateException ise){
+            ise.printStackTrace();
+            hasLoadedRanking = false;
+        }
     }
 
     @Override
