@@ -1,5 +1,6 @@
 package frolic.br.coriquiz;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,20 +12,30 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
+import frolic.br.coriquiz.utils.ExtraNames;
+
 public class WinActivity extends AppCompatActivity {
     private TextView winMessage;
     private InterstitialAd mInterstitialAd;
+    private int scoreNum = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_win);
+        this.setTitle(R.string.round_finished);
+
+        Intent intent = this.getIntent();
+        scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
+
         loadInterstistialAD();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         winMessage = (TextView) findViewById(R.id.textViewWinMessage);
-        winMessage.setText(getText(R.string.win_message));
+        String message = getString(R.string.win_message);
+        message = message.replace("%score%",Integer.toString(scoreNum));
+        winMessage.setText(message);
 
         new ShowInterstitialTask().execute(500);
     }

@@ -155,7 +155,7 @@ public class QuizDAO extends QuizDBHelper {
         this.addQuestion(q42);
         Question q43 = new Question("Quem era conhecido como Calcanhar de Ouro?", "Sócrates", "Marcelinho Carioca", "Rivelino", "Biro-Biro", "Rafael", 1);
         this.addQuestion(q43);
-        Question q44 = new Question("Em que ano o Corinthians foi criado?", "1 de fevereiro de 1909", "2 de outubro de 1920", "1 de setembro de 1910", "1 de setembro de 1810", "27 de abril de 1929", 1);
+        Question q44 = new Question("Qual a data que o Corinthians foi criado?", "1 de fevereiro de 1909", "2 de outubro de 1920", "1 de setembro de 1910", "1 de setembro de 1810", "27 de abril de 1929", 3);
         this.addQuestion(q44);
         Question q45 = new Question("Quem fez o gol de cabeça contra o palmeiras, que marcou sua volta ao futebol, ficando assim para a história?", "Chicão", "Ronaldo", "Defederico", "Edu", "Bill", 2);
         this.addQuestion(q45);
