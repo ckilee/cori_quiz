@@ -22,5 +22,9 @@ public class Utils {
         editor.commit();
     }
 
+    public static int getCurrentMaxRound(int currentLevel){
+        return Constants.MAX_ROUND_NUM+currentLevel;
+    }
+
 
 }

@@ -1,6 +1,8 @@
 package frolic.br.coriquiz;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +33,7 @@ import java.util.Set;
 import frolic.br.coriquiz.model.User;
 import frolic.br.coriquiz.utils.Constants;
 import frolic.br.coriquiz.utils.ExtraNames;
+import frolic.br.coriquiz.utils.Utils;
 
 public class BetweenRoundActivity extends AppCompatActivity {
     private TextView messageTextView;
@@ -43,6 +46,7 @@ public class BetweenRoundActivity extends AppCompatActivity {
     private Button nextRoundButton;
     private ImageView imageViewBetweenRound;
     private String curQuestion = "";
+    private int curMaxRound = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,10 @@ public class BetweenRoundActivity extends AppCompatActivity {
         setContentView(R.layout.activity_between_round);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS, Context.MODE_PRIVATE);
+        curMaxRound = Utils.getCurrentMaxRound(sharedPreferences.getInt(ExtraNames.CURRENT_LEVEL, 0));
+
         messageTextView = (TextView)findViewById(R.id.textViewMessage);
         shareButton = (Button)findViewById(R.id.buttonShare);
         nextRoundButton = (Button)findViewById(R.id.buttonNext);
@@ -82,7 +90,7 @@ public class BetweenRoundActivity extends AppCompatActivity {
         }
 
         message = message.replace("%round%",Integer.toString(roundNum));
-        message = message.replace("%missing%",Integer.toString(Constants.MAX_ROUND_NUM - roundNum));
+        message = message.replace("%missing%",Integer.toString(curMaxRound - roundNum));
         message = message.replace("%score%",Integer.toString(scoreNum));
         messageTextView.setText(message);
 

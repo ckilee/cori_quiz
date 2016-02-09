@@ -20,5 +20,6 @@ public final class ExtraNames {
     public static final String USER_PICTURE_PREFS = "userpictureprefs";
     public static final String USER_TOKEN_PREFS = "usertokenprefs";
     public static final String DB_VERSION_PREFS = "dbversionprefs";
+    public static final String CURRENT_LEVEL = "curlevel";
 
 }

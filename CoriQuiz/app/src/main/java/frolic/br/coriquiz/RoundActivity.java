@@ -43,6 +43,7 @@ public class RoundActivity extends AppCompatActivity {
     private int rightAnswer = 0;
     private int roundNum = 1;
     private int scoreNum = 0;
+    private int curMaxRound = 0;
     private boolean gotRightAnswer = false;
 
     @Override
@@ -85,6 +86,9 @@ public class RoundActivity extends AppCompatActivity {
     }
 
     private void configureViews(){
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS, Context.MODE_PRIVATE);
+        curMaxRound = Utils.getCurrentMaxRound(sharedPreferences.getInt(ExtraNames.CURRENT_LEVEL,0));
+
         questionTV.setText(question.getQuestion().toUpperCase());
         answer1.setText(question.getAnswer1().toUpperCase());
         answer2.setText(question.getAnswer2().toUpperCase());
@@ -96,7 +100,7 @@ public class RoundActivity extends AppCompatActivity {
         roundNum = intent.getIntExtra(ExtraNames.ROUND, 1);
         scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
         helpStatus = intent.getIntExtra(ExtraNames.HELP_STATUS, 0);
-        String round = roundNum+"/"+ Constants.MAX_ROUND_NUM+" ";
+        String round = roundNum+"/"+ curMaxRound+" ";
         roundNuberTV.setText(round);
 
         disableHelp(helpStatus);
@@ -242,7 +246,7 @@ public class RoundActivity extends AppCompatActivity {
     }
 
     private void proceedToNewActivityFromEscape(){
-        if( roundNum != Constants.MAX_ROUND_NUM) {
+        if( roundNum != curMaxRound) {
             Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
             intent.putExtra(ExtraNames.ROUND, roundNum);
             intent.putExtra(ExtraNames.SCORE, scoreNum);
@@ -262,7 +266,7 @@ public class RoundActivity extends AppCompatActivity {
     }
 
     private void proceedToNewActivity(){
-        if( roundNum != Constants.MAX_ROUND_NUM) {
+        if( roundNum != curMaxRound) {
             Intent intent = new Intent(RoundActivity.this, BetweenRoundActivity.class);
             intent.putExtra(ExtraNames.ROUND, roundNum);
             intent.putExtra(ExtraNames.SCORE, scoreNum);

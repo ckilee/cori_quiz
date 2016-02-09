@@ -263,18 +263,58 @@ public class Main2Activity extends AppCompatActivity
         View.OnClickListener round1Listener = new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                QuizDAO.resetNotInString();
-                Intent intent = new Intent(Main2Activity.this,RoundActivity.class);
-                intent.putExtra(ExtraNames.ROUND, 1);
-                intent.putExtra(ExtraNames.SCORE, curScore);
-                startActivityForResult(intent,ROUND_REQUEST_CODE);
+                addCurrentLevelToShared(1);
+                startRound();
+            }
+        };
+        View.OnClickListener round2Listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                addCurrentLevelToShared(2);
+                startRound();
+            }
+        };
+        View.OnClickListener round3Listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                addCurrentLevelToShared(3);
+                startRound();
+            }
+        };
+        View.OnClickListener round4Listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                addCurrentLevelToShared(4);
+                startRound();
+            }
+        };
+        View.OnClickListener round5Listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                addCurrentLevelToShared(5);
+                startRound();
             }
         };
         round1Button.setOnClickListener(round1Listener);
-        round2Button.setOnClickListener(round1Listener);
-        round3Button.setOnClickListener(round1Listener);
-        round4Button.setOnClickListener(round1Listener);
-        round5Button.setOnClickListener(round1Listener);
+        round2Button.setOnClickListener(round2Listener);
+        round3Button.setOnClickListener(round3Listener);
+        round4Button.setOnClickListener(round4Listener);
+        round5Button.setOnClickListener(round5Listener);
+    }
+
+    private void addCurrentLevelToShared(int curLevel){
+        SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(ExtraNames.CURRENT_LEVEL,curLevel);
+        editor.commit();
+    }
+
+    private void startRound(){
+        QuizDAO.resetNotInString();
+        Intent intent = new Intent(Main2Activity.this,RoundActivity.class);
+        intent.putExtra(ExtraNames.ROUND, 1);
+        intent.putExtra(ExtraNames.SCORE, curScore);
+        startActivityForResult(intent,ROUND_REQUEST_CODE);
     }
 
     @Override
