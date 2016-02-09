@@ -71,7 +71,7 @@ public class QuizDAO extends QuizDBHelper {
         if(!isDBEmpty())
             return;
         Log.i("QuizDAO","Adding default values");
-        Question q1=new Question("Quais são os nomes dos ex jogadores do Corinthians que foram embora para o Flamengo?","Emerson e Gil", "Emerson e Guerrero", "Guerrero e Danilo", "Luciano e Malcom", "Ralf e Fagner", 2);
+        Question q1=new Question("Quais são os nomes dos ex jogadores do Corinthians que foram embora para o Flamengo em 2015?","Emerson e Gil", "Emerson e Guerrero", "Guerrero e Danilo", "Luciano e Malcom", "Ralf e Fagner", 2);
         this.addQuestion(q1);
         Question q2=new Question("Qual foi o time que o Corinthians enfrentou e venceu por 5 a 3 no Paulistão 2015?", "Penapolense", "Palmeiras", "Santos", "Ituano", "Bragantino", 1);
         this.addQuestion(q2);
