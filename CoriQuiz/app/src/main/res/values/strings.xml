@@ -2,6 +2,7 @@
     <string name="app_name">Corinthians Quiz Game</string>
     <string name="new_game">Novo Jogo</string>
     <string name="ranking">Ranking</string>
+    <string name="see_ranking">Ver Ranking</string>
     <string name="friends_ranking">Ranking dos seus amigos</string>
     <string name="share">Compartilhar</string>
     <string name="question">Pergunta:</string>
@@ -12,7 +13,7 @@
     <string name="answer">Responder</string>
     <string name="next_round">Proxima Rodada</string>
     <string name="next_question">Próxima Pergunta</string>
-    <string name="publish_score">Publicar Score</string>
+    <string name="publish_score">Publicar Score&#160;&#160;&#160;</string>
     <string name="score">Score:</string>
     <string name="between_round_right_message" formatted="false">Parabens, você respondeu corretamente a pergunta: %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir a rodada =D</string>
     <string name="win_message" formatted="false">Parabéns, você terminou a rodada do Quiz! com a pontuação: %score%! Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
@@ -37,6 +38,8 @@
     <string name="title_activity_win">WinActivity</string>
     <string name="title_ranking">Ranking</string>
     <string name="choose_round">Selecione a rodada</string>
+
+    <!-- Chat Activity -->
     <string name="chat_timao">Chat do Timão</string>
     <string name="chat_cheering">Chat da Torcida</string>
     <string name="send">Enviar</string>

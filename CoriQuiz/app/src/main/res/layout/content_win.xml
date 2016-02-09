@@ -41,8 +41,26 @@
         android:elevation="5dp"
         android:id="@+id/buttonBackToMain"
         android:layout_below="@+id/cardViewTextViewMessage"
-        android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         android:background="@android:drawable/dialog_holo_light_frame"
-         />
+        android:layout_toLeftOf="@+id/space2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/see_ranking"
+        android:elevation="5dp"
+        android:id="@+id/buttonSeeRanking"
+        android:layout_below="@+id/cardViewTextViewMessage"
+        android:layout_alignParentRight="true"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:layout_toRightOf="@+id/space2" />
+
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/space2" />
 </RelativeLayout>

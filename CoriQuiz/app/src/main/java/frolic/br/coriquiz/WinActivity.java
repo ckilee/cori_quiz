@@ -1,5 +1,6 @@
 package frolic.br.coriquiz;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,9 +9,18 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import frolic.br.coriquiz.utils.ExtraNames;
 
@@ -18,6 +28,8 @@ public class WinActivity extends AppCompatActivity {
     private TextView winMessage;
     private InterstitialAd mInterstitialAd;
     private int scoreNum = 0;
+    private Button backToMainButton;
+    private Button seeScoreButton;
 
 
     @Override
@@ -26,18 +38,49 @@ public class WinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_win);
         this.setTitle(R.string.round_finished);
 
-        Intent intent = this.getIntent();
-        scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
+        configureViews();
 
         loadInterstistialAD();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        new ShowInterstitialTask().execute(500);
+    }
+
+    private void configureViews() {
+        Intent intent = this.getIntent();
+        scoreNum = intent.getIntExtra(ExtraNames.SCORE, 0);
+
         winMessage = (TextView) findViewById(R.id.textViewWinMessage);
         String message = getString(R.string.win_message);
         message = message.replace("%score%",Integer.toString(scoreNum));
         winMessage.setText(message);
 
-        new ShowInterstitialTask().execute(500);
+        backToMainButton  = (Button)this.findViewById(R.id.buttonBackToMain);
+        //Back To Main Button
+        View.OnClickListener backToMainListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                finish();
+            }
+        };
+        backToMainButton.setOnClickListener(backToMainListener);
+
+        seeScoreButton = (Button)this.findViewById(R.id.buttonSeeRanking);
+        View.OnClickListener seeRankingListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startRanking();
+            }
+        };
+        seeScoreButton.setOnClickListener(seeRankingListener);
+
+    }
+
+    private void startRanking() {
+        Intent intent = new Intent(WinActivity.this,RankingActivity.class);
+        startActivity(intent);
     }
 
     private class ShowInterstitialTask extends AsyncTask<Integer,Void,Void> {
@@ -82,5 +125,6 @@ public class WinActivity extends AppCompatActivity {
             mInterstitialAd.show();
         }
     }
+
 
 }

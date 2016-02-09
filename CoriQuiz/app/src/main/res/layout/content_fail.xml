@@ -59,11 +59,14 @@
         android:layout_height="wrap_content"
         android:text="@string/publish_score"
         android:elevation="5dp"
+        android:background="@drawable/b_face"
         android:id="@+id/buttonPublishScore"
         android:layout_below="@+id/cardViewFailMessage"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/auxLayoutCenter"
-        android:background="@android:drawable/dialog_holo_light_frame" />
+        android:textAlignment="textEnd"
+        android:textColor="#ffffff"
+        android:layout_marginTop="2dp" />
 
     <Button
         android:layout_width="wrap_content"
