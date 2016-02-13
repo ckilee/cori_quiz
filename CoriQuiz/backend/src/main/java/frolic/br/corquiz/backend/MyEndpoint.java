@@ -179,7 +179,7 @@ public class MyEndpoint {
         questionJson.add(q64);
         Question q65 = new Question("Qual jogador do Timão recebeu o apelido de Sheik por jogar um grande tempo na Arábia Saudita?", "Emerson", "Jorge Henrique", "Liedson", "Danilo", "Bruno Cesar", 1);
         questionJson.add(q65);
-        Question q66 = new Question("A decisão do mundial que o Corinthians ganhou foi em qual lugar?", "São Paulo ", "Rio de Janeiro", "Tóquio", "Yokohama", "Santos", 2);
+        Question q66 = new Question("A decisão do mundial que o Corinthians ganhou no ano de 2000 foi em qual lugar?", "São Paulo ", "Rio de Janeiro", "Tóquio", "Yokohama", "Santos", 2);
         questionJson.add(q66);
         Question q67 = new Question("Qual foi a primeira participação do Corinthians na Libertadores?", "1977", "1991", "1987", "1988", "1990", 1);
         questionJson.add(q67);
@@ -213,7 +213,7 @@ public class MyEndpoint {
         questionJson.add(q81);
         Question q82 = new Question("Qual o nome do jogador corinthiano que recebeu o apelido de 'xodó da fiel'? ", "Marcelinho Carioca ", "Tevez", "Rivelino", "Neto", "Ronaldo", 4);
         questionJson.add(q82);
-        Question q83 = new Question("A decisão do mundial que o Corinthians ganhou foi em qual lugar?", "Yokohama", "São Paulo ", "Rio de Janeiro", "Tóquio", "Santos", 3);
+        Question q83 = new Question("A decisão do mundial que o Corinthians ganhou no ano de 2012 foi em qual lugar?", "Yokohama", "São Paulo ", "Rio de Janeiro", "Tóquio", "Santos", 1);
         questionJson.add(q83);
         Question q84 = new Question("Qual a nacionalidade do zagueiro Gamarra, que passou pelo Corinthians?", "Argentino", "Paraguaio", "Uruguaio", "Boliviano", "Colombiano", 2);
         questionJson.add(q84);
