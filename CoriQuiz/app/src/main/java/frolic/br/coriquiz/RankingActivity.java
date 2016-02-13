@@ -43,38 +43,42 @@ public class RankingActivity extends AppCompatActivity {
             GraphRequestAsyncTask request1 = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), "/" + this.getString(R.string.app_id) + "/scores", new GraphRequest.Callback() {
                 @Override
                 public void onCompleted(GraphResponse response) {
-                    //response.getRawResponse());
-                    JSONArray jarray;
-                    JSONObject jobject = response.getJSONObject();
-                    jarray = jobject.optJSONArray("data");
-                    ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
-                    RankingItem.numberOfItems = 0;
-                    for (int i = 0; i < jarray.length(); i++) {
-                        JSONObject scoreObject = null;
-                        JSONObject userObject = null;
-                        try {
-                            scoreObject = jarray.getJSONObject(i);
-                            userObject = scoreObject.getJSONObject("user");
-                            RankingItem rankingItem = new RankingItem(userObject.getString("name"), scoreObject.getString("score"));
-                            rankingItemList.add(rankingItem);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                    try {
+                        JSONArray jarray;
+                        JSONObject jobject = response.getJSONObject();
+                        jarray = jobject.optJSONArray("data");
+                        ArrayList<RankingItem> rankingItemList = new ArrayList<RankingItem>();
+                        RankingItem.numberOfItems = 0;
+                        for (int i = 0; i < jarray.length(); i++) {
+                            JSONObject scoreObject = null;
+                            JSONObject userObject = null;
+                            try {
+                                scoreObject = jarray.getJSONObject(i);
+                                userObject = scoreObject.getJSONObject("user");
+                                RankingItem rankingItem = new RankingItem(userObject.getString("name"), scoreObject.getString("score"));
+                                rankingItemList.add(rankingItem);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            //get your values
+
                         }
-                        //get your values
-
+                        RankingFragment rankingFragment = RankingFragment.newInstance(rankingItemList);
+                        getFragmentManager().beginTransaction().add(R.id.rankingFragmentRankingActivity, rankingFragment).commit();
+                    }catch(NullPointerException ne){
+                        loadRankingnotLoggedFragment();
+                        ne.printStackTrace();
                     }
-
-                    RankingFragment rankingFragment = RankingFragment.newInstance(rankingItemList);
-
-                    getFragmentManager().beginTransaction().add(R.id.rankingFragmentRankingActivity, rankingFragment).commit();
                 }
 
             }).executeAsync();
         }else{
-            RankingNotLogedFragment rankingNotLogedFragment = RankingNotLogedFragment.newInstance();
-            getFragmentManager().beginTransaction().add(R.id.rankingFragmentRankingActivity, rankingNotLogedFragment).commit();
+            loadRankingnotLoggedFragment();
         }
-
+    }
+    private void loadRankingnotLoggedFragment(){
+        RankingNotLogedFragment rankingNotLogedFragment = RankingNotLogedFragment.newInstance();
+        getFragmentManager().beginTransaction().add(R.id.rankingFragmentRankingActivity, rankingNotLogedFragment).commit();
     }
 
 }
