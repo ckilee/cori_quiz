@@ -133,7 +133,7 @@ public class BetweenRoundActivity extends AppCompatActivity {
             }
             jsonObject.put("name", "Acertou a resposta no Corinthians Quiz Game!");
             jsonObject.put("caption", "Corinthians Quiz Game");
-            jsonObject.put("description", User.name+ this.getString(messageId).replace("%question%",curQuestion).replace("%pontos%",Integer.toString(scoreNum)));
+            jsonObject.put("description", User.name+" " +this.getString(messageId).replace("%question%",curQuestion).replace("%pontos%",Integer.toString(scoreNum)));
             jsonObject.put("link", "https://play.google.com/store/apps/details?id=frolic.br.coriquiz");
             jsonObject.put("picture", "http://ckilee.esy.es/uploads/CorinthiansQuizGame.png");
         } catch (JSONException e) {
