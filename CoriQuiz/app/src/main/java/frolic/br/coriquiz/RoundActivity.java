@@ -1,5 +1,6 @@
 package frolic.br.coriquiz;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -90,6 +91,7 @@ public class RoundActivity extends AppCompatActivity {
         curMaxRound = Utils.getCurrentMaxRound(sharedPreferences.getInt(ExtraNames.CURRENT_LEVEL,0));
 
         questionTV.setText(question.getQuestion().toUpperCase());
+
         answer1.setText(question.getAnswer1().toUpperCase());
         answer2.setText(question.getAnswer2().toUpperCase());
         answer3.setText(question.getAnswer3().toUpperCase());
