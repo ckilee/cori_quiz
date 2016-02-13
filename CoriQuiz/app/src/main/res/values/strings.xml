@@ -14,6 +14,7 @@
     <string name="next_round">Proxima Rodada</string>
     <string name="next_question">Próxima Pergunta</string>
     <string name="publish_score">Publicar Score&#160;&#160;&#160;</string>
+    <string name="share_face_button">Compartilhar&#160;&#160;&#160;</string>
     <string name="score">Score:</string>
     <string name="between_round_right_message" formatted="false">Parabens, você respondeu corretamente a pergunta: %round% do Quiz com o score: %score%, faltam apenas %missing% para concluir a rodada =D</string>
     <string name="win_message" formatted="false">Parabéns, você terminou a rodada do Quiz! com a pontuação: %score%! Se gostou do jogo, por favor não se esqueça de compartilhar nas redes sociais.</string>
