@@ -118,7 +118,14 @@ public class BetweenRoundActivity extends AppCompatActivity {
         shareButton.setOnClickListener(shareListener);
 
         if(AccessToken.getCurrentAccessToken() == null){
-            shareButton.setEnabled(false);
+            //Share Button
+            View.OnClickListener cannotShareListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Toast.makeText(BetweenRoundActivity.this,R.string.must_be_loged_to_publish,Toast.LENGTH_LONG).show();
+                }
+            };
+            shareButton.setOnClickListener(cannotShareListener);
         }
     }
 

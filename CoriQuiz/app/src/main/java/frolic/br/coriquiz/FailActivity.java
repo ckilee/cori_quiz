@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -95,7 +96,14 @@ public class FailActivity extends AppCompatActivity {
         };
         publishScoreButton.setOnClickListener(publishListener);
         if(AccessToken.getCurrentAccessToken() == null) {
-            publishScoreButton.setEnabled(false);
+            //Publish Score Button
+            View.OnClickListener cannotPublishListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Toast.makeText(FailActivity.this, R.string.must_be_loged_to_publish_ranking, Toast.LENGTH_LONG).show();
+                }
+            };
+            publishScoreButton.setOnClickListener(cannotPublishListener);
         }
 
         backButton = (Button)this.findViewById(R.id.buttonBackToMain);
