@@ -305,7 +305,7 @@ public class Main2Activity extends AppCompatActivity
     private void addCurrentLevelToShared(int curLevel){
         SharedPreferences sharedPreferences = getSharedPreferences(ExtraNames.MY_PREFS,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(ExtraNames.CURRENT_LEVEL,curLevel);
+        editor.putInt(ExtraNames.CURRENT_LEVEL, curLevel);
         editor.commit();
     }
 
@@ -452,7 +452,7 @@ public class Main2Activity extends AppCompatActivity
     }
 
     private void attemptToConnect() {
-        if(User.name==null){
+        if(AccessToken.getCurrentAccessToken() == null){
             Toast.makeText(getApplicationContext(),R.string.must_be_loged_to_enter_in_chat,Toast.LENGTH_LONG).show();
         }else {
             Intent connectIntent = new Intent(this, ChatActivity.class);
